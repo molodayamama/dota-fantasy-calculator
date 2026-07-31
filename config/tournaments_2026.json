@@ -11,35 +11,35 @@
     "name": "The International 2026 - Regional Qualifier Europe",
     "short_name": "TI 2026 EU Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19890,
     "name": "The International 2026 - Regional Qualifier North America",
     "short_name": "TI 2026 NA Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19894,
     "name": "The International 2026 - Regional Qualifier Southeast Asia",
     "short_name": "TI 2026 SEA Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19891,
     "name": "The International 2026 - Regional Qualifier South America",
     "short_name": "TI 2026 SA Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19893,
     "name": "The International 2026 - Regional Qualifier China",
     "short_name": "TI 2026 CN Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19101,
@@ -53,7 +53,7 @@
     "name": "Road To EWC 2026 Regional Qualifiers",
     "short_name": "Road To EWC Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19696,
@@ -74,28 +74,28 @@
     "name": "DreamLeague Season 29 Qualifiers",
     "short_name": "DreamLeague S29 Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19539,
     "name": "RES Unchained - A Blast Dota Slam VII Qualifier EU",
     "short_name": "BLAST VII EU Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19538,
     "name": "RES Unchained - A Blast Dota Slam VII Qualifier SEA",
     "short_name": "BLAST VII SEA Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19520,
     "name": "BLAST Slam VII China Qualifier",
     "short_name": "BLAST VII CN Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19422,
@@ -137,42 +137,35 @@
     "name": "ESL One Birmingham 2026 Qualifiers",
     "short_name": "ESL Birmingham Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19089,
     "name": "DreamLeague Season 28 Qualifiers",
     "short_name": "DreamLeague S28 Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19155,
     "name": "RES Unchained - A Blast Dota Slam VI Qualifier EU",
     "short_name": "BLAST VI EU Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19154,
     "name": "RES Unchained - A Blast Dota Slam VI Qualifier SEA",
     "short_name": "BLAST VI SEA Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19148,
     "name": "BLAST Slam VI China Qualifier",
     "short_name": "BLAST VI CN Qual",
     "kind": "qualifier",
-    "enabled_by_default": true
-  },
-  {
-    "id": 19268,
-    "name": "FISSURE Universe Episode 8 Open Qualifiers",
-    "short_name": "FISSURE 8 Open Qual",
-    "kind": "qualifier",
-    "enabled_by_default": true
+    "enabled_by_default": false
   },
   {
     "id": 19719,
@@ -182,4 +175,3 @@
     "enabled_by_default": false
   }
 ]
-

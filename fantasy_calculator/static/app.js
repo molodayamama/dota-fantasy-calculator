@@ -1,4 +1,4 @@
-const STORAGE_KEY = "dota2fantasy2026.state.v5";
+const STORAGE_KEY = "dota2fantasy2026.state.v6";
 
 const PATCH_PRESETS = {
   patch741: {start: "2026-05-26", end: null},
@@ -77,6 +77,7 @@ const I18N = {
     noData: "Данных пока нет.",
     tournaments: "Турниры",
     allTournaments: "Все турниры",
+    allExceptQuals: "Всё кроме квал",
     lastHalfYear: "Последние полгода",
     patch741: "Патч 7.41",
     patch740: "Патч 7.40",
@@ -139,6 +140,7 @@ const I18N = {
     noData: "No data yet.",
     tournaments: "Tournaments",
     allTournaments: "All tournaments",
+    allExceptQuals: "All except quals",
     lastHalfYear: "Last half-year",
     patch741: "Patch 7.41",
     patch740: "Patch 7.40",
@@ -184,6 +186,7 @@ let rules = null;
 let snapshot = null;
 let state = null;
 let renderedRoleScores = {};
+let tournamentScrollLeft = 0;
 
 function safeNumber(value, fallback = 0) {
   const parsed = Number(value);
@@ -314,7 +317,7 @@ function buildDefaultState() {
     prefixId: "",
     suffixId: "",
     avoidRiskySuffixes: true,
-    tournamentPreset: "all",
+    tournamentPreset: "no-quals",
     tournamentMonths: 6,
     tournaments,
     slots,
@@ -332,6 +335,20 @@ function selectedTournamentIds() {
 
 function tournamentById() {
   return Object.fromEntries(snapshot.tournaments.map((tournament) => [String(tournament.id), tournament]));
+}
+
+function captureTournamentScroll() {
+  const strip = app.querySelector(".tournament-strip");
+  if (strip) {
+    tournamentScrollLeft = strip.scrollLeft;
+  }
+}
+
+function restoreTournamentScroll() {
+  const strip = app.querySelector(".tournament-strip");
+  if (strip) {
+    strip.scrollLeft = tournamentScrollLeft;
+  }
 }
 
 function roleRule(roleId) {
@@ -798,6 +815,12 @@ function applyTournamentPreset(preset) {
       state.tournaments[String(tournament.id)] = safeNumber(tournament.match_count) > 0;
     }
   }
+  if (preset === "no-quals") {
+    for (const tournament of snapshot.tournaments) {
+      state.tournaments[String(tournament.id)] = safeNumber(tournament.match_count) > 0
+        && tournament.kind !== "qualifier";
+    }
+  }
   if (preset === "half-year") {
     state.tournamentMonths = 6;
     applyRecentMonths(6);
@@ -811,6 +834,7 @@ function applyTournamentPreset(preset) {
 function renderTournamentPresets() {
   const presets = [
     ["all", t("allTournaments")],
+    ["no-quals", t("allExceptQuals")],
     ["half-year", t("lastHalfYear")],
     ["patch741", t("patch741")],
     ["patch740", t("patch740")],
@@ -840,7 +864,7 @@ function renderTournaments() {
     const count = safeNumber(tournament.match_count);
     const dateText = tournamentPeriod(tournament);
     return `
-      <label class="tournament-chip ${enabled ? "is-on" : ""}">
+      <label class="tournament-chip ${enabled ? "is-on" : ""}" data-kind="${escapeHtml(tournament.kind || "")}">
         <input type="checkbox" data-action="toggle-tournament" data-tournament="${escapeHtml(id)}" ${enabled ? "checked" : ""}>
         <span class="tournament-label">${escapeHtml(kind)}</span>
         <span class="tournament-name" title="${escapeHtml(tournament.name)}">${escapeHtml(tournament.short_name || tournament.name)}</span>
@@ -1242,6 +1266,7 @@ function renderPlayerStatsPanel() {
 }
 
 function render() {
+  captureTournamentScroll();
   updateDocumentMeta();
   const nextRoleScores = {};
   app.innerHTML = `
@@ -1254,6 +1279,7 @@ function render() {
     ${renderPlayerStatsPanel()}
     ${renderScoringPanel()}
   `;
+  restoreTournamentScroll();
   renderedRoleScores = nextRoleScores;
 }
 

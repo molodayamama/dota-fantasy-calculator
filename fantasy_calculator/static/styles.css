@@ -491,7 +491,10 @@ input:focus-visible {
 }
 
 .tournament-strip {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, minmax(82px, auto));
+  grid-auto-columns: minmax(198px, 220px);
   width: 100%;
   max-width: 100%;
   gap: var(--space-3);
@@ -503,7 +506,8 @@ input:focus-visible {
 .tournament-chip {
   position: relative;
   display: grid;
-  min-width: 198px;
+  width: 100%;
+  min-width: 0;
   gap: var(--space-1);
   padding: var(--space-3);
   border: 1px solid rgba(214, 178, 82, 0.35);
@@ -1374,6 +1378,10 @@ input:focus-visible {
   .preset-row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tournament-strip {
+    grid-auto-columns: minmax(180px, 74vw);
   }
 }
 

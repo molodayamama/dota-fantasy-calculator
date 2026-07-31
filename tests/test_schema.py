@@ -25,6 +25,10 @@ class SchemaTest(unittest.TestCase):
         tournaments = read_json(Path("config/tournaments_2026.json"))
         by_id = {item["id"]: item for item in tournaments}
         self.assertFalse(by_id[19719]["enabled_by_default"])
+        self.assertNotIn(19268, by_id)
+        for tournament in tournaments:
+            if tournament["kind"] == "qualifier":
+                self.assertFalse(tournament["enabled_by_default"])
 
     def test_roster_config_has_ti_participants(self):
         rosters = read_json(Path("config/teams_2026.json"))
