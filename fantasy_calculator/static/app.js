@@ -26,36 +26,6 @@ const PLAYER_STAT_ORDER = [
   "firstblood",
 ];
 
-const PLAYER_TITLE_COUNTERS = [
-  {key: "str", ru: "Героев силы", en: "Strength heroes played"},
-  {key: "agi", ru: "Героев ловкости", en: "Agility heroes played"},
-  {key: "int", ru: "Героев интеллекта", en: "Intelligence heroes played"},
-  {key: "all", ru: "Универсальных героев", en: "Universal heroes played"},
-  {key: "green", ru: "Зелёных героев", en: "Green heroes played"},
-  {key: "blue", ru: "Синих героев", en: "Blue heroes played"},
-  {key: "red", ru: "Красных героев", en: "Red heroes played"},
-  {key: "otherworldly", ru: "Нежить/демоны/духи", en: "Undead/demon/spirit heroes played"},
-  {key: "horns", ru: "Герои с рогами/крыльями", en: "Horns/wings heroes played"},
-  {key: "bearded", ru: "Бородатые/пушистые герои", en: "Bearded/fuzzy heroes played"},
-  {key: "aquatic", ru: "Водные/огненные/ледяные герои", en: "Aquatic/fiery/icy heroes played"},
-  {key: "first_pick", ru: "Выбраны первыми", en: "First picked"},
-  {key: "last_pick", ru: "Выбраны последними", en: "Last picked"},
-  {key: "games_with_arcana", ru: "С арканой", en: "Arcana equipped"},
-  {key: "games_with_hero_master", ru: "25+ уровень Dota Plus", en: "25+ Dota Plus hero level"},
-];
-
-const PLAYER_SUBTITLE_COUNTERS = [
-  {key: "0_kills", ru: "Игры без убийств", en: "Games without kills"},
-  {key: "lowest_networth", ru: "Самый низкий networth", en: "Lowest networth"},
-  {key: "bbs_before_30min", ru: "Выкуп до 30 минуты", en: "Buyback before 30min"},
-  {key: "most_deaths", ru: "Больше всего смертей", en: "Has the most deaths"},
-  {key: "4+_active_items", ru: "4+ активных предмета", en: "4 or more active items"},
-  {key: "most_assists", ru: "Больше всего ассистов", en: "Has the most assists"},
-  {key: "9_slots", ru: "9 слотов в инвентаре", en: "9 slots in inventory"},
-  {key: "lost_games", ru: "Проигранные игры", en: "Lost games"},
-  {key: "most_voice_lines", ru: "Больше всего реплик", en: "Most voice lines"},
-];
-
 const STAT_LABEL_OVERRIDES = {
   ru: {
     firstblood: "Первая кровь",
@@ -243,6 +213,7 @@ function formatScore(value, digits = 0) {
   return safeNumber(value).toLocaleString(locale(), {
     maximumFractionDigits: digits,
     minimumFractionDigits: 0,
+    useGrouping: currentLang() !== "en",
   });
 }
 
@@ -802,14 +773,42 @@ function renderPlayerStatsControls() {
   `;
 }
 
+function currentTitleCounters() {
+  return Object.entries(rules.title_prefixes || {}).map(([id, rule]) => ({
+    key: rule.condition || id,
+    label: labelFor(rule, id),
+    scope: rule.scope || "player_title",
+  }));
+}
+
+function currentSubtitleCounters() {
+  return Object.entries(rules.title_suffixes || {}).map(([id, rule]) => ({
+    key: rule.condition || id,
+    label: labelFor(rule, id),
+    scope: rule.scope || "player_subtitle",
+  }));
+}
+
 function aggregatePlayerCount(player, bucket, condition, tournamentIds) {
   return tournamentIds.reduce((acc, id) => (
     acc + safeNumber(player.per_tournament?.[String(id)]?.[bucket]?.[condition])
   ), 0);
 }
 
+function aggregateCounterCount(player, counter, tournamentIds) {
+  if (counter.scope === "global_subtitle") {
+    const tournaments = tournamentById();
+    return tournamentIds.reduce((acc, id) => (
+      acc + safeNumber(tournaments[String(id)]?.global_subtitle_counts?.[counter.key])
+    ), 0);
+  }
+
+  const bucket = counter.scope === "player_subtitle" ? "subtitle_counts" : "title_counts";
+  return aggregatePlayerCount(player, bucket, counter.key, tournamentIds);
+}
+
 function counterLabel(counter) {
-  return currentLang() === "ru" ? counter.ru : counter.en;
+  return counter.label || counter.key;
 }
 
 function renderPlayerStatRows(player, tournamentIds) {
@@ -829,11 +828,11 @@ function renderPlayerStatRows(player, tournamentIds) {
     }).join("");
 }
 
-function renderCounterRows(player, counters, bucket, tournamentIds) {
+function renderCounterRows(player, counters, tournamentIds) {
   return counters.map((counter) => `
     <li>
       <span>${escapeHtml(counterLabel(counter))}</span>
-      <strong>${formatScore(aggregatePlayerCount(player, bucket, counter.key, tournamentIds))}</strong>
+      <strong>${formatScore(aggregateCounterCount(player, counter, tournamentIds))}</strong>
     </li>
   `).join("");
 }
@@ -843,8 +842,8 @@ function renderPlayerCard(item) {
   const tournamentIds = selectedTournamentIds();
   const matches = playerMatches(player, tournamentIds);
   const statRows = renderPlayerStatRows(player, tournamentIds);
-  const titleRows = renderCounterRows(player, PLAYER_TITLE_COUNTERS, "title_counts", tournamentIds);
-  const subtitleRows = renderCounterRows(player, PLAYER_SUBTITLE_COUNTERS, "subtitle_counts", tournamentIds);
+  const titleRows = renderCounterRows(player, currentTitleCounters(), tournamentIds);
+  const subtitleRows = renderCounterRows(player, currentSubtitleCounters(), tournamentIds);
 
   return `
     <article class="player-card">
