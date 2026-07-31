@@ -3,10 +3,10 @@ import { expect, test } from "@playwright/test";
 test("calculator renders the three role banners and persists controls", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Fantasy 2026" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Титул" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "ОСНОВА" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "ЦЕНТР" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "ПОДДЕРЖКА" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Title" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "CORE" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "MID" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "SUPPORT" })).toBeVisible();
 
   const prefix = page.locator('[data-action="set-prefix"]');
   const suffix = page.locator('[data-action="set-suffix"]');

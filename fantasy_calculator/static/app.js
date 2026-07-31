@@ -94,6 +94,16 @@ const I18N = {
     titleCounters: "Титулы",
     subtitleCounters: "Субтитры",
     noPlayersForSort: "Нет игроков с данными по выбранной позиции.",
+    scoringTitle: "Расчёты",
+    scoringHint: "Коэффициенты берутся из текущего fantasy_rules.json. В слот вводится процент из игры: 250 значит множитель 2.5.",
+    scoringFormulas: "Формулы",
+    scoringFactors: "Коэффициенты показателей",
+    scoringExample: "Пример по текущему выбору",
+    scoringNormal: "Обычные показатели: среднее по включённым турнирам × коэффициент показателя × процент слота.",
+    scoringInverse: "Смерти: max(0, база - средние смерти × штраф) × процент слота.",
+    scoringCap: "Если у показателя есть максимум, результат обрезается до этого максимума до применения процента.",
+    scoringTitleBonus: "Титул: сумма трёх слотов умножается на средний бонус префикса и суффикса по выбранным турнирам.",
+    noScoringExample: "Недостаточно данных для примера.",
     loadError: "Не удалось загрузить калькулятор.",
     statGroups: {
       red: "Боевые показатели",
@@ -106,7 +116,7 @@ const I18N = {
       "Dota Fantasy 2026 Calculator: Dota 2 fantasy calculator with tournament filters, title modifiers, coefficients, and player rankings.",
     metaTitle: "Dota Fantasy 2026 Calculator | Dota 2 Fantasy Calculator",
     brandMeta: "Dota 2 fantasy calculator",
-    supportAuthor: "Support the author",
+    supportAuthor: "",
     snapshot: "Snapshot",
     noSnapshot: "data has not been generated yet",
     players: "players",
@@ -142,6 +152,16 @@ const I18N = {
     titleCounters: "Titles",
     subtitleCounters: "Subtitles",
     noPlayersForSort: "No players with data for the selected role.",
+    scoringTitle: "Scoring",
+    scoringHint: "Factors come from the current fantasy_rules.json. Slot percent is entered like in game: 250 means multiplier 2.5.",
+    scoringFormulas: "Formulas",
+    scoringFactors: "Stat factors",
+    scoringExample: "Current example",
+    scoringNormal: "Normal stats: average over enabled tournaments × stat factor × slot percent.",
+    scoringInverse: "Deaths: max(0, base - average deaths × penalty) × slot percent.",
+    scoringCap: "If a stat has a cap, the result is capped before the slot percent is applied.",
+    scoringTitleBonus: "Title: the three-slot subtotal is multiplied by the average prefix and suffix bonus over selected tournaments.",
+    noScoringExample: "Not enough data for an example.",
     loadError: "Could not load the calculator.",
     statGroups: {
       red: "Combat stats",
@@ -282,7 +302,7 @@ function buildDefaultState() {
   const firstStat = Object.keys(rules.stats)[0] || "";
 
   return {
-    lang: "ru",
+    lang: "en",
     prefixId: "",
     suffixId: "",
     tournamentPreset: "all",
@@ -379,6 +399,42 @@ function scoreSlot(player, slot, percent, tournamentIds) {
   }
   const rawScore = average * safeNumber(stat.factor, 1);
   return Math.min(rawScore, safeNumber(stat.cap, rawScore)) * coefficient;
+}
+
+function baseSlotScore(stat, average) {
+  if (!stat) return 0;
+  if (stat.scoring === "inverse") {
+    return Math.max(0, safeNumber(stat.base, 1950) - average * safeNumber(stat.factor, 1));
+  }
+  const rawScore = average * safeNumber(stat.factor, 1);
+  return Math.min(rawScore, safeNumber(stat.cap, rawScore));
+}
+
+function statFormulaText(stat) {
+  const factor = formatScore(stat.factor);
+  if (stat.scoring === "inverse") {
+    return `${formatScore(stat.base)} - ${currentLang() === "ru" ? "среднее" : "avg"} × ${factor}`;
+  }
+  if (stat.cap != null) {
+    return `min(${currentLang() === "ru" ? "среднее" : "avg"} × ${factor}, ${formatScore(stat.cap)})`;
+  }
+  return `${currentLang() === "ru" ? "среднее" : "avg"} × ${factor}`;
+}
+
+function statFactorLine(stat) {
+  if (stat.scoring === "inverse") {
+    return currentLang() === "ru"
+      ? `${formatScore(stat.base)} очков, −${formatScore(stat.factor)} за смерть`
+      : `${formatScore(stat.base)} points, −${formatScore(stat.factor)} per death`;
+  }
+  if (stat.cap != null) {
+    return currentLang() === "ru"
+      ? `×${formatScore(stat.factor)}; максимум ${formatScore(stat.cap)}`
+      : `×${formatScore(stat.factor)}; cap ${formatScore(stat.cap)}`;
+  }
+  return currentLang() === "ru"
+    ? `+${formatScore(stat.factor)} за единицу`
+    : `+${formatScore(stat.factor)} per unit`;
 }
 
 function scorePlayer(player, roleId) {
@@ -506,13 +562,17 @@ function renderTopbar() {
     ? new Date(snapshot.generated_at).toLocaleString(locale())
     : t("noSnapshot");
   const nextLang = currentLang() === "ru" ? "EN" : "RU";
+  const supportText = t("supportAuthor");
+  const supportMarkup = supportText
+    ? `<a class="support-link" href="https://pay.cloudtips.ru/p/e6d007c2" target="_blank" rel="noopener noreferrer">${escapeHtml(supportText)}</a>`
+    : `<span class="support-link support-link-empty" aria-hidden="true"></span>`;
 
   return `
     <header class="topbar">
       <div class="brand-lockup">
         <h1 class="brand-title">Fantasy 2026</h1>
       </div>
-      <a class="support-link" href="https://pay.cloudtips.ru/p/e6d007c2" target="_blank" rel="noopener noreferrer">${escapeHtml(t("supportAuthor"))}</a>
+      ${supportMarkup}
       <div class="topbar-actions">
         <button class="language-toggle" type="button" data-action="toggle-language" aria-label="Language">${nextLang}</button>
         <p class="snapshot-meta">${escapeHtml(t("snapshot"))}: ${escapeHtml(generated)}<br>${formatScore(snapshot.players.length)} ${escapeHtml(t("players"))}</p>
@@ -837,6 +897,133 @@ function renderCounterRows(player, counters, tournamentIds) {
   `).join("");
 }
 
+function slotCalculationLine(detail) {
+  const average = formatScore(detail.average, 2);
+  const factor = formatScore(detail.stat.factor);
+  const base = formatScore(detail.baseScore, 2);
+  const score = formatScore(detail.score, 2);
+  const percent = formatScore(detail.percent);
+  let baseFormula = "";
+
+  if (detail.stat.scoring === "inverse") {
+    baseFormula = `${formatScore(detail.stat.base)} - ${average} × ${factor} = ${base}`;
+  } else if (detail.stat.cap != null) {
+    baseFormula = `min(${average} × ${factor}, ${formatScore(detail.stat.cap)}) = ${base}`;
+  } else {
+    baseFormula = `${average} × ${factor} = ${base}`;
+  }
+
+  return `${baseFormula}; ${base} × ${percent}% = ${score}`;
+}
+
+function selectedExampleRole() {
+  return rules.roles.find((role) => selectedPlayerForRole(role.id)) || rules.roles[0] || null;
+}
+
+function renderScoringFactorRows() {
+  return PLAYER_STAT_ORDER
+    .filter((statId) => Boolean(rules.stats[statId]))
+    .map((statId) => {
+      const stat = rules.stats[statId];
+      return `
+        <li>
+          <span>${escapeHtml(statLabel(stat))}</span>
+          <strong>${escapeHtml(statFactorLine(stat))}</strong>
+          <code>${escapeHtml(statFormulaText(stat))}</code>
+        </li>
+      `;
+    }).join("");
+}
+
+function renderScoringExample() {
+  const role = selectedExampleRole();
+  const player = role ? selectedPlayerForRole(role.id) : null;
+  const tournamentIds = selectedTournamentIds();
+  if (!role || !player || !tournamentIds.length) {
+    return `<p class="empty-list">${escapeHtml(t("noScoringExample"))}</p>`;
+  }
+
+  const details = (state.slots[role.id] || [])
+    .map((slot) => {
+      const stat = rules.stats[slot.stat];
+      if (!stat) return null;
+      const percent = slotPercent(slot);
+      const average = statAverage(player, slot.stat, tournamentIds);
+      const baseScore = baseSlotScore(stat, average);
+      return {
+        stat,
+        percent,
+        average,
+        baseScore,
+        score: baseScore * percent / 100,
+      };
+    })
+    .filter(Boolean);
+
+  const subtotal = details.reduce((acc, detail) => acc + detail.score, 0);
+  const bonus = titleBonusPercent(player, tournamentIds);
+  const total = subtotal + subtotal * bonus / 100;
+  const roleName = labelFor(role, role.id);
+  const titleText = bonus
+    ? `${formatScore(subtotal, 2)} × (1 + ${formatScore(bonus, 2)}%) = ${formatScore(total, 2)}`
+    : `${formatScore(subtotal, 2)} × 1 = ${formatScore(total, 2)}`;
+
+  const rows = details.map((detail) => `
+    <li>
+      <span>${escapeHtml(statLabel(detail.stat))}</span>
+      <strong>${escapeHtml(slotCalculationLine(detail))}</strong>
+    </li>
+  `).join("");
+
+  return `
+    <div class="scoring-example-head">
+      <strong>${escapeHtml(player.name)}</strong>
+      <span>${escapeHtml(roleName)}</span>
+    </div>
+    <ol class="scoring-example-list">
+      ${rows}
+      <li>
+        <span>${escapeHtml(currentLang() === "ru" ? "Сумма слотов" : "Slot subtotal")}</span>
+        <strong>${formatScore(subtotal, 2)}</strong>
+      </li>
+      <li>
+        <span>${escapeHtml(currentLang() === "ru" ? "Титул" : "Title")}</span>
+        <strong>${escapeHtml(titleText)}</strong>
+      </li>
+    </ol>
+  `;
+}
+
+function renderScoringPanel() {
+  return `
+    <section class="scoring-section" aria-label="${escapeHtml(t("scoringTitle"))}">
+      <div class="section-heading scoring-heading">
+        <h2>${escapeHtml(t("scoringTitle"))}</h2>
+        <span>${escapeHtml(t("scoringHint"))}</span>
+      </div>
+      <div class="scoring-grid">
+        <section class="scoring-card">
+          <h3>${escapeHtml(t("scoringFormulas"))}</h3>
+          <ul class="scoring-copy">
+            <li>${escapeHtml(t("scoringNormal"))}</li>
+            <li>${escapeHtml(t("scoringInverse"))}</li>
+            <li>${escapeHtml(t("scoringCap"))}</li>
+            <li>${escapeHtml(t("scoringTitleBonus"))}</li>
+          </ul>
+        </section>
+        <section class="scoring-card">
+          <h3>${escapeHtml(t("scoringExample"))}</h3>
+          ${renderScoringExample()}
+        </section>
+      </div>
+      <section class="scoring-card scoring-factors">
+        <h3>${escapeHtml(t("scoringFactors"))}</h3>
+        <ul class="scoring-factor-grid">${renderScoringFactorRows()}</ul>
+      </section>
+    </section>
+  `;
+}
+
 function renderPlayerCard(item) {
   const player = item.player;
   const tournamentIds = selectedTournamentIds();
@@ -899,6 +1086,7 @@ function render() {
     </main>
     ${renderTournaments()}
     ${renderPlayerStatsPanel()}
+    ${renderScoringPanel()}
   `;
   renderedRoleScores = nextRoleScores;
 }
