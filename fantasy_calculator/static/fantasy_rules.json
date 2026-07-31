@@ -5,6 +5,8 @@
       "id": "core",
       "name_ru": "Основа",
       "name_en": "Core",
+      "selection": "team_duo",
+      "role_numbers": [1, 3],
       "slot_colors": ["red", "green", "red"],
       "default_slots": [
         {"stat": "tower_kills", "percent": 110},
@@ -16,6 +18,8 @@
       "id": "mid",
       "name_ru": "Центр",
       "name_en": "Mid",
+      "selection": "team_player",
+      "role_numbers": [2],
       "slot_colors": ["red", "blue", "green"],
       "default_slots": [
         {"stat": "deaths", "percent": 130},
@@ -27,6 +31,8 @@
       "id": "support",
       "name_ru": "Поддержка",
       "name_en": "Support",
+      "selection": "team_duo",
+      "role_numbers": [4, 5],
       "slot_colors": ["blue", "green", "blue"],
       "default_slots": [
         {"stat": "camps_stacked", "percent": 210},
@@ -71,14 +77,14 @@
     "heroic": {"name_ru": "Героический", "name_en": "Heroic", "percent": 9, "scope": "player_title", "condition": "heroic", "description_ru": "при игре за героя в маске или плаще", "description_en": "when playing a masked or cloaked hero"}
   },
   "title_suffixes": {
-    "tormented": {"name_ru": "Мученик", "name_en": "Martyr", "percent": 23, "scope": "global_subtitle", "condition": "total_deaths_from_torm", "description_ru": "если кто-либо из игроков умрёт от Терзателя", "description_en": "if any player dies to a Tormentor"},
-    "flayed_twins_priest": {"name_ru": "Жрец Бескожих близнецов", "name_en": "Priest of the Flayed Twins", "percent": 9, "scope": "global_subtitle", "condition": "firstblood_before_horn", "description_ru": "если кто-либо прольёт первую кровь до стартового горна", "description_en": "if first blood happens before the starting horn"},
-    "patient": {"name_ru": "Выжидатель", "name_en": "Patient", "percent": 23, "scope": "global_subtitle", "condition": "firstblood_after_10min", "description_ru": "если первая кровь не пролилась до 10:00", "description_en": "if first blood does not happen before 10:00"},
-    "underdog": {"name_ru": "Аутсайдер", "name_en": "Underdog", "percent": 6, "scope": "player_subtitle", "condition": "lost_games", "description_ru": "если команда этого игрока потерпела поражение", "description_en": "if this player's team lost the game"},
-    "decisive": {"name_ru": "Удалец", "name_en": "Decisive", "percent": 24, "scope": "global_subtitle", "condition": "games<25min", "description_ru": "если игра продлилась менее 25 минут", "description_en": "if the game lasted less than 25 minutes"},
-    "victory_maker": {"name_ru": "Творец победы", "name_en": "Victory Maker", "percent": 16, "scope": "global_subtitle", "condition": "last_possible_match", "description_ru": "в последней возможной игре матча", "description_en": "in the last possible game of the match"},
-    "lucky": {"name_ru": "Везунчик", "name_en": "Lucky", "percent": 21, "scope": "global_subtitle", "condition": "duration_ends_8", "description_ru": "если длительность игры заканчивается на цифру 8", "description_en": "if the game duration ends in 8"},
-    "tormentor": {"name_ru": "Мучитель", "name_en": "Tormentor", "percent": 13, "scope": "global_subtitle", "condition": "fountain_kill", "description_ru": "если хотя бы одного игрока убьют у его фонтана", "description_en": "if at least one player is killed near their fountain"}
+    "tormented": {"name_ru": "Мученик", "name_en": "Tormented", "percent": 23, "scope": "global_subtitle", "condition": "total_deaths_from_torm", "risk": "rare", "description_ru": "если кто-либо из игроков умрёт от Терзателя", "description_en": "if any player dies to a Tormentor"},
+    "flayed_twins_priest": {"name_ru": "Жрец Бескожих близнецов", "name_en": "Flayed Twins Acolyte", "percent": 9, "scope": "global_subtitle", "condition": "firstblood_before_horn", "risk": "rare", "description_ru": "если кто-либо прольёт первую кровь до стартового горна", "description_en": "if first blood happens before the starting horn"},
+    "patient": {"name_ru": "Выжидатель", "name_en": "Patient", "percent": 23, "scope": "global_subtitle", "condition": "firstblood_after_10min", "risk": "rare", "description_ru": "если первая кровь не пролилась до 10:00", "description_en": "if first blood does not happen before 10:00"},
+    "underdog": {"name_ru": "Аутсайдер", "name_en": "Underdog", "percent": 6, "scope": "player_subtitle", "condition": "lost_games", "risk": "stable", "description_ru": "если команда этого игрока потерпела поражение", "description_en": "if this player's team lost the game"},
+    "decisive": {"name_ru": "Удалец", "name_en": "Decisive", "percent": 24, "scope": "global_subtitle", "condition": "games<25min", "risk": "rare", "description_ru": "если игра продлилась менее 25 минут", "description_en": "if the game lasted less than 25 minutes"},
+    "victory_maker": {"name_ru": "Творец победы", "name_en": "Clutch", "percent": 16, "scope": "global_subtitle", "condition": "last_possible_match", "risk": "stable", "description_ru": "в последней возможной игре матча", "description_en": "in the last possible game of the match"},
+    "lucky": {"name_ru": "Везунчик", "name_en": "Lucky", "percent": 21, "scope": "global_subtitle", "condition": "duration_ends_8", "risk": "gamble", "description_ru": "если длительность игры заканчивается на цифру 8", "description_en": "if the game duration ends in 8"},
+    "tormentor": {"name_ru": "Мучитель", "name_en": "Cruel", "percent": 13, "scope": "global_subtitle", "condition": "fountain_kill", "risk": "gamble", "description_ru": "если хотя бы одного игрока убьют у его фонтана", "description_en": "if at least one player is killed near their fountain"}
   },
   "hero_tag_groups": {
     "red": [2, 4, 11, 14, 25, 35, 37, 38, 49, 51, 61, 64, 65, 69, 78, 79, 81, 87, 95, 104, 106, 110, 120, 128, 129, 137],

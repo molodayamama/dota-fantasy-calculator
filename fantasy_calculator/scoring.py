@@ -28,6 +28,18 @@ def stat_average(player: dict[str, Any], stat_id: str, selected_tournaments: Ite
     return total / count
 
 
+def entity_players(player: dict[str, Any]) -> list[dict[str, Any]]:
+    players = player.get("players")
+    if isinstance(players, list) and players:
+        return players
+    return [player]
+
+
+def has_entity_players(player: dict[str, Any]) -> bool:
+    players = player.get("players")
+    return isinstance(players, list) and bool(players)
+
+
 def title_bonus_percent(player: dict[str, Any], title_id: str | None, rules: dict[str, Any], selected_tournaments: Iterable[int | str]) -> float:
     if not title_id:
         return 0.0
@@ -115,6 +127,9 @@ def combined_title_bonus_percent(
 
 
 def score_slot(player: dict[str, Any], stat_id: str | None, percent: float | int | str | None, rules: dict[str, Any], selected_tournaments: Iterable[int | str]) -> float:
+    if has_entity_players(player):
+        return sum(score_slot(item, stat_id, percent, rules, selected_tournaments) for item in entity_players(player))
+
     if not stat_id:
         return 0.0
 
@@ -148,9 +163,12 @@ def score_player(
     tournaments: Iterable[dict[str, Any]] | None = None,
 ) -> float:
     selected_ids = list(map(str, selected_tournaments))
-    subtotal = sum(score_slot(player, slot.get("stat"), slot.get("percent", 100), rules, selected_ids) for slot in slots)
-    if prefix_id or suffix_id:
-        bonus = combined_title_bonus_percent(player, prefix_id, suffix_id, rules, selected_ids, tournaments)
-    else:
-        bonus = title_bonus_percent(player, title_id, rules, selected_ids)
-    return round(subtotal + subtotal * bonus / 100, 2)
+    total = 0.0
+    for item in entity_players(player):
+        subtotal = sum(score_slot(item, slot.get("stat"), slot.get("percent", 100), rules, selected_ids) for slot in slots)
+        if prefix_id or suffix_id:
+            bonus = combined_title_bonus_percent(item, prefix_id, suffix_id, rules, selected_ids, tournaments)
+        else:
+            bonus = title_bonus_percent(item, title_id, rules, selected_ids)
+        total += subtotal + subtotal * bonus / 100
+    return round(total, 2)

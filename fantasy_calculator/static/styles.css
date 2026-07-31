@@ -197,6 +197,103 @@ input:focus-visible {
   gap: var(--space-3);
 }
 
+.title-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.risk-control {
+  display: grid;
+  gap: 3px;
+  justify-items: end;
+  min-width: 0;
+}
+
+.risk-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.risk-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.guide-credit {
+  color: rgba(242, 210, 122, 0.78);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.guide-credit:hover,
+.guide-credit:focus-visible {
+  color: #fff1b4;
+  text-shadow: 0 0 14px rgba(242, 210, 122, 0.34);
+}
+
+.risk-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gold-hot);
+  cursor: pointer;
+}
+
+.info-dot {
+  display: inline-grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border: 1px solid rgba(242, 210, 122, 0.68);
+  border-radius: 50%;
+  color: #1f1508;
+  background: var(--gold-hot);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: help;
+}
+
+.risk-tooltip {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 10;
+  width: min(420px, 80vw);
+  padding: var(--space-3);
+  border: 1px solid rgba(242, 210, 122, 0.58);
+  border-radius: var(--radius);
+  color: var(--text);
+  background: rgba(17, 10, 5, 0.98);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.42);
+  font-size: 14px;
+  line-height: 1.35;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: normal;
+}
+
+.risk-toggle:hover .risk-tooltip,
+.risk-toggle:focus-within .risk-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .title-selects,
 .sort-controls {
   display: grid;
@@ -1192,6 +1289,25 @@ input:focus-visible {
   .title-panel-head {
     display: grid;
     gap: var(--space-3);
+  }
+
+  .title-actions {
+    display: grid;
+    justify-content: stretch;
+  }
+
+  .risk-toggle {
+    white-space: normal;
+  }
+
+  .risk-control {
+    justify-items: start;
+  }
+
+  .risk-tooltip {
+    left: 0;
+    right: auto;
+    width: min(100%, 420px);
   }
 
   .title-action-button {

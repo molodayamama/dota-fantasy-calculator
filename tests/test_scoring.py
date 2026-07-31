@@ -80,6 +80,59 @@ class ScoringTest(unittest.TestCase):
         )
         self.assertEqual(score, 575.0)
 
+    def test_team_entity_scores_sum_role_players(self):
+        team = {
+            "players": [
+                {
+                    "per_tournament": {
+                        "1": {
+                            "matches": 1,
+                            "stats": {"kills": {"sum": 5, "count": 1}},
+                            "title_counts": {"red": 1},
+                            "subtitle_counts": {},
+                        }
+                    }
+                },
+                {
+                    "per_tournament": {
+                        "1": {
+                            "matches": 1,
+                            "stats": {"kills": {"sum": 7, "count": 1}},
+                            "title_counts": {"red": 0},
+                            "subtitle_counts": {},
+                        }
+                    }
+                },
+            ]
+        }
+        score = score_player(
+            team,
+            [{"stat": "kills", "percent": 100}],
+            None,
+            self.rules,
+            ["1"],
+            prefix_id="crimson",
+        )
+        self.assertEqual(score, 1300.0)
+
+    def test_single_player_team_entity_scores_inner_player(self):
+        team = {
+            "players": [
+                {
+                    "per_tournament": {
+                        "1": {
+                            "matches": 1,
+                            "stats": {"kills": {"sum": 6, "count": 1}},
+                            "title_counts": {},
+                            "subtitle_counts": {},
+                        }
+                    }
+                }
+            ]
+        }
+        score = score_player(team, [{"stat": "kills", "percent": 100}], None, self.rules, ["1"])
+        self.assertEqual(score, 600.0)
+
 
 if __name__ == "__main__":
     unittest.main()

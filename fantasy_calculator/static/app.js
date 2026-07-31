@@ -1,4 +1,4 @@
-const STORAGE_KEY = "dota2fantasy2026.state.v4";
+const STORAGE_KEY = "dota2fantasy2026.state.v5";
 
 const PATCH_PRESETS = {
   patch741: {start: "2026-05-26", end: null},
@@ -67,9 +67,13 @@ const I18N = {
     suffix: "Суффикс",
     noPrefix: "Без префикса",
     noSuffix: "Без суффикса",
-    bestTitle: "Выбрать лучший титул по ТЕКУЩИМ выбранным игрокам",
-    bestPlayers: "Лучшие игроки",
-    noPlayers: "Нет игроков",
+    bestTitle: "Выбрать лучший титул по ТЕКУЩИМ выбранным командам",
+    avoidRiskySuffixes: "Не учитывать рискованные суффиксы",
+    riskySuffixInfo: "Автоподбор не выбирает редкие и азартные суффиксы из гайда: Мученик, Жрец Бескожих близнецов, Выжидатель, Удалец, Везунчик и Мучитель. Вручную их всё равно можно выбрать.",
+    guideCredit: "спасибо за гайд",
+    bestPlayers: "Лучшие команды",
+    bestTeams: "Лучшие команды",
+    noPlayers: "Нет команд",
     noData: "Данных пока нет.",
     tournaments: "Турниры",
     allTournaments: "Все турниры",
@@ -93,7 +97,7 @@ const I18N = {
     totalMatches: "Всего матчей",
     titleCounters: "Титулы",
     subtitleCounters: "Субтитры",
-    noPlayersForSort: "Нет игроков с данными по выбранной позиции.",
+    noPlayersForSort: "Нет команд с данными по выбранной позиции.",
     scoringTitle: "Расчёты",
     scoringHint: "Коэффициенты берутся из текущего fantasy_rules.json. В слот вводится процент из игры: 250 значит множитель 2.5.",
     scoringFormulas: "Формулы",
@@ -102,7 +106,7 @@ const I18N = {
     scoringNormal: "Обычные показатели: среднее по включённым турнирам × коэффициент показателя × процент слота.",
     scoringInverse: "Смерти: max(0, база - средние смерти × штраф) × процент слота.",
     scoringCap: "Если у показателя есть максимум, результат обрезается до этого максимума до применения процента.",
-    scoringTitleBonus: "Титул: сумма трёх слотов умножается на средний бонус префикса и суффикса по выбранным турнирам.",
+    scoringTitleBonus: "Титул: у выбранной команды считаются нужные игроки роли; бонус префикса и суффикса применяется к каждому из них, затем очки складываются.",
     noScoringExample: "Недостаточно данных для примера.",
     loadError: "Не удалось загрузить калькулятор.",
     statGroups: {
@@ -125,9 +129,13 @@ const I18N = {
     suffix: "Suffix",
     noPrefix: "No prefix",
     noSuffix: "No suffix",
-    bestTitle: "Pick best title for current selected players",
-    bestPlayers: "Best players",
-    noPlayers: "No players",
+    bestTitle: "Pick best title for current selected teams",
+    avoidRiskySuffixes: "Ignore risky suffixes",
+    riskySuffixInfo: "Auto-pick skips rare and gamble suffixes from the guide: Tormented, Flayed Twins Acolyte, Patient, Decisive, Lucky, and Cruel. You can still select them manually.",
+    guideCredit: "thx for guide",
+    bestPlayers: "Best teams",
+    bestTeams: "Best teams",
+    noPlayers: "No teams",
     noData: "No data yet.",
     tournaments: "Tournaments",
     allTournaments: "All tournaments",
@@ -151,7 +159,7 @@ const I18N = {
     totalMatches: "Total matches",
     titleCounters: "Titles",
     subtitleCounters: "Subtitles",
-    noPlayersForSort: "No players with data for the selected role.",
+    noPlayersForSort: "No teams with data for the selected role.",
     scoringTitle: "Scoring",
     scoringHint: "Factors come from the current fantasy_rules.json. Slot percent is entered like in game: 250 means multiplier 2.5.",
     scoringFormulas: "Formulas",
@@ -160,7 +168,7 @@ const I18N = {
     scoringNormal: "Normal stats: average over enabled tournaments × stat factor × slot percent.",
     scoringInverse: "Deaths: max(0, base - average deaths × penalty) × slot percent.",
     scoringCap: "If a stat has a cap, the result is capped before the slot percent is applied.",
-    scoringTitleBonus: "Title: the three-slot subtotal is multiplied by the average prefix and suffix bonus over selected tournaments.",
+    scoringTitleBonus: "Title: the selected team's role players are scored individually with prefix and suffix bonuses, then added together.",
     noScoringExample: "Not enough data for an example.",
     loadError: "Could not load the calculator.",
     statGroups: {
@@ -305,6 +313,7 @@ function buildDefaultState() {
     lang: "en",
     prefixId: "",
     suffixId: "",
+    avoidRiskySuffixes: true,
     tournamentPreset: "all",
     tournamentMonths: 6,
     tournaments,
@@ -325,6 +334,91 @@ function tournamentById() {
   return Object.fromEntries(snapshot.tournaments.map((tournament) => [String(tournament.id), tournament]));
 }
 
+function roleRule(roleId) {
+  return rules.roles.find((role) => role.id === roleId) || {};
+}
+
+function roleUsesTeamSelection(roleId) {
+  const role = roleRule(roleId);
+  return ["team_duo", "team_player"].includes(role.selection) || ["core", "mid", "support"].includes(roleId);
+}
+
+function roleNumbersFor(roleId) {
+  return (roleRule(roleId).role_numbers || [])
+    .map((value) => Number(value))
+    .filter(Number.isFinite);
+}
+
+function playerMatchesRole(player, roleId) {
+  const numbers = roleNumbersFor(roleId);
+  const playerRoleNumber = Number(player.role_number);
+  if (numbers.length && Number.isFinite(playerRoleNumber)) {
+    return numbers.includes(playerRoleNumber);
+  }
+  return player.role === roleId;
+}
+
+function orderedEntityPlayers(players) {
+  return [...players].sort((a, b) => {
+    const aRole = Number(a.role_number);
+    const bRole = Number(b.role_number);
+    if (Number.isFinite(aRole) && Number.isFinite(bRole) && aRole !== bRole) {
+      return aRole - bRole;
+    }
+    return a.name.localeCompare(b.name, locale());
+  });
+}
+
+function entityPlayers(entity) {
+  return entity?.players?.length ? entity.players : entity ? [entity] : [];
+}
+
+function hasEntityPlayers(entity) {
+  return Array.isArray(entity?.players) && entity.players.length > 0;
+}
+
+function entityName(entity) {
+  if (entity?.unit_type?.startsWith("team")) {
+    return entity.team_name || entity.name || "";
+  }
+  return entity?.name || entityPlayers(entity).map((player) => player.name).join(" & ");
+}
+
+function entityTeamName(entity) {
+  return entity?.team_name || entityPlayers(entity)[0]?.team_name || "";
+}
+
+function entityMemberNames(entity) {
+  return entityPlayers(entity).map((player) => player.name).join(" & ");
+}
+
+function roleEntities(roleId) {
+  const players = snapshot.players.filter((player) => playerMatchesRole(player, roleId));
+  if (!roleUsesTeamSelection(roleId)) {
+    return players.map((player) => ({...player, players: [player], unit_type: "player"}));
+  }
+
+  const byTeam = new Map();
+  for (const player of players) {
+    const team = player.team_name || "Unknown";
+    if (!byTeam.has(team)) byTeam.set(team, []);
+    byTeam.get(team).push(player);
+  }
+
+  return [...byTeam.entries()].map(([teamName, teamPlayers]) => {
+    const ordered = orderedEntityPlayers(teamPlayers);
+    return {
+      id: `team:${roleId}:${teamName}`,
+      name: teamName,
+      role: roleId,
+      team_name: teamName,
+      matches: Math.max(0, ...ordered.map((player) => player.matches || 0)),
+      players: ordered,
+      unit_type: roleRule(roleId).selection || "team",
+    };
+  });
+}
+
 function statAverage(player, statId, tournamentIds) {
   let sum = 0;
   let count = 0;
@@ -338,6 +432,10 @@ function statAverage(player, statId, tournamentIds) {
 }
 
 function playerMatches(player, tournamentIds) {
+  if (hasEntityPlayers(player)) {
+    return Math.max(0, ...entityPlayers(player).map((item) => playerMatches(item, tournamentIds)));
+  }
+
   return tournamentIds.reduce((acc, id) => (
     acc + safeNumber(player.per_tournament?.[String(id)]?.matches)
   ), 0);
@@ -388,7 +486,17 @@ function titleBonusPercentFor(player, tournamentIds, prefixId, suffixId) {
     + titleRuleBonusPercent(player, rules.title_suffixes?.[suffixId], tournamentIds);
 }
 
+function suffixAllowedForAutoPick(suffixId) {
+  if (!state.avoidRiskySuffixes || !suffixId) return true;
+  const risk = rules.title_suffixes?.[suffixId]?.risk || "";
+  return !["avoid", "rare", "gamble"].includes(risk);
+}
+
 function scoreSlot(player, slot, percent, tournamentIds) {
+  if (hasEntityPlayers(player)) {
+    return entityPlayers(player).reduce((acc, item) => acc + scoreSlot(item, slot, percent, tournamentIds), 0);
+  }
+
   if (!slot.stat) return 0;
   const stat = rules.stats[slot.stat];
   if (!stat) return 0;
@@ -399,6 +507,18 @@ function scoreSlot(player, slot, percent, tournamentIds) {
   }
   const rawScore = average * safeNumber(stat.factor, 1);
   return Math.min(rawScore, safeNumber(stat.cap, rawScore)) * coefficient;
+}
+
+function baseSlotScoreForEntity(player, statId, tournamentIds) {
+  const stat = rules.stats[statId];
+  if (!stat) return 0;
+  return entityPlayers(player).reduce((acc, item) => (
+    acc + baseSlotScore(stat, statAverage(item, statId, tournamentIds))
+  ), 0);
+}
+
+function statAverageForEntity(player, statId, tournamentIds) {
+  return entityPlayers(player).reduce((acc, item) => acc + statAverage(item, statId, tournamentIds), 0);
 }
 
 function baseSlotScore(stat, average) {
@@ -440,22 +560,27 @@ function statFactorLine(stat) {
 function scorePlayer(player, roleId) {
   const tournamentIds = selectedTournamentIds();
   const slots = state.slots[roleId] || [];
-  const subtotal = slots.reduce((acc, slot) => acc + scoreSlot(player, slot, slotPercent(slot), tournamentIds), 0);
-  const titleBonus = titleBonusPercent(player, tournamentIds);
-  return subtotal + subtotal * titleBonus / 100;
+  return entityPlayers(player).reduce((acc, item) => {
+    const subtotal = slots.reduce((total, slot) => total + scoreSlot(item, slot, slotPercent(slot), tournamentIds), 0);
+    const titleBonus = titleBonusPercent(item, tournamentIds);
+    return acc + subtotal + subtotal * titleBonus / 100;
+  }, 0);
 }
 
 function scorePlayerWithTitle(player, roleId, prefixId, suffixId) {
   const tournamentIds = selectedTournamentIds();
   const slots = state.slots[roleId] || [];
-  const subtotal = slots.reduce((acc, slot) => acc + scoreSlot(player, slot, slotPercent(slot), tournamentIds), 0);
-  const titleBonus = titleBonusPercentFor(player, tournamentIds, prefixId, suffixId);
-  return subtotal + subtotal * titleBonus / 100;
+  return entityPlayers(player).reduce((acc, item) => {
+    const subtotal = slots.reduce((total, slot) => total + scoreSlot(item, slot, slotPercent(slot), tournamentIds), 0);
+    const titleBonus = titleBonusPercentFor(item, tournamentIds, prefixId, suffixId);
+    return acc + subtotal + subtotal * titleBonus / 100;
+  }, 0);
 }
 
 function selectedPlayerForRole(roleId) {
   const selectedId = state.selectedPlayers[roleId];
-  const selectedPlayer = snapshot.players.find((player) => player.role === roleId && player.id === selectedId);
+  const entities = roleEntities(roleId);
+  const selectedPlayer = entities.find((player) => player.id === selectedId);
   if (selectedPlayer) return selectedPlayer;
 
   const candidates = candidatesForRole(roleId);
@@ -472,7 +597,7 @@ function chooseBestTitleForCurrentPlayers() {
   if (!anchors.length) return;
 
   const prefixIds = ["", ...Object.keys(rules.title_prefixes || {})];
-  const suffixIds = ["", ...Object.keys(rules.title_suffixes || {})];
+  const suffixIds = ["", ...Object.keys(rules.title_suffixes || {}).filter(suffixAllowedForAutoPick)];
   let bestChoice = {prefixId: state.prefixId, suffixId: state.suffixId, score: -Infinity};
 
   for (const prefixId of prefixIds) {
@@ -516,10 +641,9 @@ function renderOdometerScore(value, previousValue) {
 }
 
 function candidatesForRole(roleId) {
-  return snapshot.players
-    .filter((player) => player.role === roleId)
+  return roleEntities(roleId)
     .map((player) => ({player, score: scorePlayer(player, roleId)}))
-    .sort((a, b) => b.score - a.score || a.player.name.localeCompare(b.player.name, locale()))
+    .sort((a, b) => b.score - a.score || entityName(a.player).localeCompare(entityName(b.player), locale()))
     .slice(0, 10);
 }
 
@@ -604,7 +728,20 @@ function renderTitlePanel() {
     <section class="title-panel" aria-label="${escapeHtml(t("title"))}">
       <div class="title-panel-head">
         <h2>${escapeHtml(t("title"))}</h2>
-        <button class="title-action-button" type="button" data-action="pick-best-title">${escapeHtml(t("bestTitle"))}</button>
+        <div class="title-actions">
+          <div class="risk-control">
+            <div class="risk-toggle">
+              <label class="risk-checkbox">
+                <input type="checkbox" data-action="set-risk-filter" ${state.avoidRiskySuffixes ? "checked" : ""}>
+                <span>${escapeHtml(t("avoidRiskySuffixes"))}</span>
+              </label>
+              <span class="info-dot" tabindex="0" aria-label="${escapeHtml(t("riskySuffixInfo"))}">i</span>
+              <span class="risk-tooltip" role="tooltip">${escapeHtml(t("riskySuffixInfo"))}</span>
+            </div>
+            <a class="guide-credit" href="https://www.reddit.com/r/DotA2/comments/1vble84/fantasy_league_2026_guide/" target="_blank" rel="noopener noreferrer">${escapeHtml(t("guideCredit"))}</a>
+          </div>
+          <button class="title-action-button" type="button" data-action="pick-best-title">${escapeHtml(t("bestTitle"))}</button>
+        </div>
       </div>
       <div class="title-selects">
         <label>
@@ -726,9 +863,7 @@ function renderTournaments() {
 function renderBanner(role, nextRoleScores) {
   const candidates = candidatesForRole(role.id);
   const preferredId = state.selectedPlayers[role.id] || candidates[0]?.player.id || null;
-  const selectedPlayer = snapshot.players.find((player) => player.role === role.id && player.id === preferredId)
-    || candidates[0]?.player
-    || null;
+  const selectedPlayer = candidates.find(({player}) => player.id === preferredId)?.player || candidates[0]?.player || null;
   const selectedId = selectedPlayer?.id || null;
   const selectedScore = selectedPlayer ? formatScore(scorePlayer(selectedPlayer, role.id)) : "0";
   const previousScore = renderedRoleScores[role.id] || selectedScore;
@@ -736,11 +871,12 @@ function renderBanner(role, nextRoleScores) {
   const selectedMatches = selectedPlayer ? playerMatches(selectedPlayer, selectedTournamentIds()) : 0;
   const slots = state.slots[role.id] || [];
   const roleName = labelFor(role, role.id).toUpperCase();
+  const candidateHeading = roleUsesTeamSelection(role.id) ? t("bestTeams") : t("bestPlayers");
 
   const candidateItems = candidates.map(({player, score}) => `
     <li>
       <button class="candidate-button ${player.id === selectedId ? "is-selected" : ""}" type="button" data-action="select-player" data-role="${escapeHtml(role.id)}" data-player="${escapeHtml(player.id)}">
-        <span class="candidate-name" title="${escapeHtml(player.name)}">${escapeHtml(player.name)}</span>
+        <span class="candidate-name" title="${escapeHtml(entityMemberNames(player) || entityName(player))}">${escapeHtml(entityName(player))}</span>
         <span class="candidate-score">${formatScore(score)}</span>
       </button>
     </li>
@@ -788,7 +924,7 @@ function renderBanner(role, nextRoleScores) {
       </div>
       <div class="banner-body">
         <div class="candidate-panel">
-          <div class="slot-label candidate-heading">${escapeHtml(t("bestPlayers"))}</div>
+          <div class="slot-label candidate-heading">${escapeHtml(candidateHeading)}</div>
           <ol class="candidate-list">${candidateItems || `<li class="empty-list">${escapeHtml(t("noPlayers"))}</li>`}</ol>
         </div>
         <div class="ribbons">${slotMarkup}</div>
@@ -806,14 +942,13 @@ function sortedPlayers() {
   const statRule = rules.stats[statId] || {};
   const tournamentIds = selectedTournamentIds();
 
-  return snapshot.players
-    .filter((player) => player.role === roleId)
+  return roleEntities(roleId)
     .map((player) => {
-      const average = statAverage(player, statId, tournamentIds);
+      const average = statAverageForEntity(player, statId, tournamentIds);
       const score = scoreSlot(player, {stat: statId}, 100, tournamentIds);
       return {player, average, score, fantasyScore: scorePlayer(player, roleId)};
     })
-    .sort((a, b) => b.score - a.score || b.average - a.average || a.player.name.localeCompare(b.player.name, locale()))
+    .sort((a, b) => b.score - a.score || b.average - a.average || entityName(a.player).localeCompare(entityName(b.player), locale()))
     .slice(0, 24)
     .map((item) => ({...item, statName: statLabel(statRule)}));
 }
@@ -850,6 +985,10 @@ function currentSubtitleCounters() {
 }
 
 function aggregatePlayerCount(player, bucket, condition, tournamentIds) {
+  if (hasEntityPlayers(player)) {
+    return entityPlayers(player).reduce((acc, item) => acc + aggregatePlayerCount(item, bucket, condition, tournamentIds), 0);
+  }
+
   return tournamentIds.reduce((acc, id) => (
     acc + safeNumber(player.per_tournament?.[String(id)]?.[bucket]?.[condition])
   ), 0);
@@ -916,6 +1055,31 @@ function slotCalculationLine(detail) {
   return `${baseFormula}; ${base} × ${percent}% = ${score}`;
 }
 
+function slotCalculationLineForEntity(detail) {
+  const average = formatScore(detail.average, 2);
+  const factor = formatScore(detail.stat.factor);
+  const base = formatScore(detail.baseScore, 2);
+  const score = formatScore(detail.score, 2);
+  const percent = formatScore(detail.percent);
+  let baseFormula = "";
+
+  if (detail.playerCount > 1 && detail.stat.scoring === "inverse") {
+    baseFormula = `sum max(0, ${formatScore(detail.stat.base)} - avg x ${factor}) = ${base}`;
+  } else if (detail.playerCount > 1 && detail.stat.cap != null) {
+    baseFormula = `sum min(avg x ${factor}, ${formatScore(detail.stat.cap)}) = ${base}`;
+  } else if (detail.playerCount > 1) {
+    baseFormula = `sum(avg x ${factor}) = ${base}`;
+  } else if (detail.stat.scoring === "inverse") {
+    baseFormula = `${formatScore(detail.stat.base)} - ${average} x ${factor} = ${base}`;
+  } else if (detail.stat.cap != null) {
+    baseFormula = `min(${average} x ${factor}, ${formatScore(detail.stat.cap)}) = ${base}`;
+  } else {
+    baseFormula = `${average} x ${factor} = ${base}`;
+  }
+
+  return `${baseFormula}; ${base} x ${percent}% = ${score}`;
+}
+
 function selectedExampleRole() {
   return rules.roles.find((role) => selectedPlayerForRole(role.id)) || rules.roles[0] || null;
 }
@@ -948,21 +1112,22 @@ function renderScoringExample() {
       const stat = rules.stats[slot.stat];
       if (!stat) return null;
       const percent = slotPercent(slot);
-      const average = statAverage(player, slot.stat, tournamentIds);
-      const baseScore = baseSlotScore(stat, average);
+      const average = statAverageForEntity(player, slot.stat, tournamentIds);
+      const baseScore = baseSlotScoreForEntity(player, slot.stat, tournamentIds);
       return {
         stat,
         percent,
         average,
         baseScore,
         score: baseScore * percent / 100,
+        playerCount: entityPlayers(player).length,
       };
     })
     .filter(Boolean);
 
   const subtotal = details.reduce((acc, detail) => acc + detail.score, 0);
-  const bonus = titleBonusPercent(player, tournamentIds);
-  const total = subtotal + subtotal * bonus / 100;
+  const total = scorePlayer(player, role.id);
+  const bonus = subtotal > 0 ? (total / subtotal - 1) * 100 : 0;
   const roleName = labelFor(role, role.id);
   const titleText = bonus
     ? `${formatScore(subtotal, 2)} × (1 + ${formatScore(bonus, 2)}%) = ${formatScore(total, 2)}`
@@ -971,13 +1136,13 @@ function renderScoringExample() {
   const rows = details.map((detail) => `
     <li>
       <span>${escapeHtml(statLabel(detail.stat))}</span>
-      <strong>${escapeHtml(slotCalculationLine(detail))}</strong>
+      <strong>${escapeHtml(slotCalculationLineForEntity(detail))}</strong>
     </li>
   `).join("");
 
   return `
     <div class="scoring-example-head">
-      <strong>${escapeHtml(player.name)}</strong>
+      <strong>${escapeHtml(entityName(player))}</strong>
       <span>${escapeHtml(roleName)}</span>
     </div>
     <ol class="scoring-example-list">
@@ -1031,13 +1196,14 @@ function renderPlayerCard(item) {
   const statRows = renderPlayerStatRows(player, tournamentIds);
   const titleRows = renderCounterRows(player, currentTitleCounters(), tournamentIds);
   const subtitleRows = renderCounterRows(player, currentSubtitleCounters(), tournamentIds);
+  const subhead = player.unit_type?.startsWith("team") ? entityMemberNames(player) : entityTeamName(player);
 
   return `
     <article class="player-card">
       <header class="player-card-head">
         <div>
-          <h3>${escapeHtml(player.name)}</h3>
-          <span>${escapeHtml(player.team_name || "-")}</span>
+          <h3>${escapeHtml(entityName(player))}</h3>
+          <span>${escapeHtml(subhead || "-")}</span>
         </div>
         <strong>${formatScore(item.fantasyScore)}</strong>
       </header>
@@ -1105,6 +1271,9 @@ function onChange(event) {
   }
   if (action === "set-suffix") {
     state.suffixId = target.value;
+  }
+  if (action === "set-risk-filter") {
+    state.avoidRiskySuffixes = target.checked;
   }
   if (action === "toggle-tournament") {
     state.tournaments[target.dataset.tournament] = target.checked;

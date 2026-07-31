@@ -319,11 +319,13 @@ def aggregate_matches(
                 if roster_player:
                     player_id = _roster_player_id(roster_player["team_name"], roster_player)
                     role = str(roster_player.get("role") or infer_role(player, rules))
+                    role_number = roster_player.get("role_number")
                     display_name = str(roster_player.get("nick") or _display_name(player))
                     team_name = str(roster_player.get("team_name") or "")
                 else:
                     player_id = _player_id(player, int(match_id))
                     role = infer_role(player, rules)
+                    role_number = None
                     display_name = _display_name(player)
                     team_name = match_detail.get("radiant_name") if _is_radiant(player) else match_detail.get("dire_name")
 
@@ -333,6 +335,7 @@ def aggregate_matches(
                         "id": player_id,
                         "name": display_name,
                         "role": role,
+                        "role_number": role_number,
                         "team_name": team_name or "",
                         "team_logo": None,
                         "matches": 0,
@@ -341,6 +344,8 @@ def aggregate_matches(
                     },
                 )
                 record["name"] = display_name
+                if role_number is not None:
+                    record["role_number"] = role_number
                 record["team_name"] = team_name or record.get("team_name", "")
                 record["_role_counts"][role] = int(record["_role_counts"].get(role, 0)) + 1
                 record["role"] = max(record["_role_counts"], key=record["_role_counts"].get)
@@ -436,6 +441,7 @@ def aggregate_matches(
                         "id": player_id,
                         "name": str(roster_player.get("nick") or "Unknown"),
                         "role": str(roster_player.get("role") or "core"),
+                        "role_number": roster_player.get("role_number"),
                         "team_name": team_name,
                         "team_logo": None,
                         "matches": 0,

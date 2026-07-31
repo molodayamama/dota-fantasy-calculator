@@ -184,7 +184,66 @@ class RefreshParserTest(unittest.TestCase):
         self.assertEqual(len(snapshot["players"]), 1)
         self.assertEqual(snapshot["players"][0]["name"], "Carry")
         self.assertEqual(snapshot["players"][0]["role"], "mid")
+        self.assertEqual(snapshot["players"][0]["role_number"], None)
         self.assertEqual(snapshot["players"][0]["team_name"], "Roster Team")
+
+    def test_roster_role_number_is_preserved(self):
+        rules = {
+            "active_item_ids": [],
+            "hero_tag_groups": {},
+            "role_overrides": {"accounts": {}, "names": {}},
+        }
+        rosters = {
+            "teams": [
+                {
+                    "name": "Roster Team",
+                    "players": [
+                        {"nick": "Offlaner", "role": "core", "role_number": 3},
+                    ],
+                }
+            ]
+        }
+        tournaments = [{"id": 1, "name": "Fixture Cup", "short_name": "Fixture", "kind": "main", "enabled_by_default": True}]
+        league_matches = {"1": [{"match_id": 42, "start_time": 1780000000}]}
+        match_details = {
+            "42": {
+                "match_id": 42,
+                "start_time": 1780000000,
+                "duration": 1600,
+                "radiant_win": True,
+                "players": [
+                    {
+                        "account_id": 101,
+                        "name": "Offlaner",
+                        "player_slot": 0,
+                        "hero_id": 1,
+                        "lane_role": 3,
+                        "kills": 1,
+                        "deaths": 1,
+                        "assists": 1,
+                        "last_hits": 100,
+                        "denies": 0,
+                        "gold_per_min": 400,
+                        "item_uses": {},
+                        "ability_uses": {},
+                        "killed": {},
+                        "killed_by": {},
+                    }
+                ],
+            }
+        }
+
+        snapshot = aggregate_matches(
+            year=2026,
+            tournaments=tournaments,
+            league_matches=league_matches,
+            match_details=match_details,
+            heroes={1: {"primary_attr": "str"}},
+            rules=rules,
+            team_rosters=rosters,
+        )
+
+        self.assertEqual(snapshot["players"][0]["role_number"], 3)
 
 
 if __name__ == "__main__":

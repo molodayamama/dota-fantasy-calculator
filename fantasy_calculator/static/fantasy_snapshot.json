@@ -1266,7 +1266,8 @@
             "9_slots": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:teamvision:9class",
@@ -2241,7 +2242,8 @@
             "most_voice_lines": 2
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:teamliquid:ace",
@@ -3298,7 +3300,8 @@
             "4+_active_items": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:xtremegaming:ame",
@@ -4265,7 +4268,8 @@
             "lost_games": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:1wteam:ari",
@@ -5062,7 +5066,8 @@
             "4+_active_items": 2
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:teamfalcons:atf",
@@ -6050,7 +6055,8 @@
             "most_voice_lines": 3
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:vicigaming:bach",
@@ -6725,7 +6731,8 @@
             "0_kills": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:gamerlegion:bignum",
@@ -7792,7 +7799,8 @@
             "lost_games": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:teamliquid:boxi",
@@ -8688,7 +8696,8 @@
             "most_voice_lines": 3
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:1wteam:bzm",
@@ -9490,7 +9499,8 @@
             "9_slots": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:teamyandex:chirajunior",
@@ -10283,7 +10293,8 @@
             "most_deaths": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:teamspirit:collapse",
@@ -11168,7 +11179,8 @@
             "most_assists": 2
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:huligani:corrupted",
@@ -11934,7 +11946,8 @@
             "4+_active_items": 2
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:teamfalcons:cr1t",
@@ -12914,7 +12927,8 @@
             "lowest_networth": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:nigmagalaxy:davai",
@@ -13595,7 +13609,8 @@
             "most_voice_lines": 4
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:teamyandex:dm",
@@ -14262,7 +14277,8 @@
             "most_assists": 2
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:teamvision:dukalis",
@@ -15254,7 +15270,8 @@
             "most_deaths": 1
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:teamresilience:echozz",
@@ -15544,7 +15561,8 @@
             "most_voice_lines": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:gamerlegion:fayde",
@@ -16597,7 +16615,8 @@
             "0_kills": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:xtremegaming:fy",
@@ -17586,7 +17605,8 @@
             "most_deaths": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:nigmagalaxy:gh",
@@ -18537,7 +18557,8 @@
             "9_slots": 1
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:gamerlegion:ghost",
@@ -19208,7 +19229,8 @@
             "most_voice_lines": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:betboomteam:gpk",
@@ -20301,7 +20323,8 @@
             "most_assists": 2
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:auroragaming:kaori",
@@ -21407,7 +21430,8 @@
             "4+_active_items": 1
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:betboomteam:kataomi",
@@ -22505,7 +22529,8 @@
             "most_assists": 2
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:betboomteam:kiritych",
@@ -23562,7 +23587,8 @@
             "lost_games": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:lgdgaming:kj",
@@ -24665,7 +24691,8 @@
             "4+_active_items": 2
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:teamspirit:larl",
@@ -25363,7 +25390,8 @@
             "4+_active_items": 10
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:nigmagalaxy:lorenof",
@@ -26322,7 +26350,8 @@
             "4+_active_items": 3
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:teamliquid:m1cke",
@@ -27377,7 +27406,8 @@
             "4+_active_items": 2
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:teamyandex:malady",
@@ -28179,7 +28209,8 @@
             "most_assists": 2
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:teamfalcons:malr1ne",
@@ -29070,7 +29101,8 @@
             "4+_active_items": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:betboomteam:miero",
@@ -30140,7 +30172,8 @@
             "most_voice_lines": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:auroragaming:mikoto",
@@ -31034,7 +31067,8 @@
             "most_assists": 2
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:auroragaming:mira",
@@ -32134,7 +32168,8 @@
             "4+_active_items": 4
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:huligani:mirage",
@@ -32616,7 +32651,8 @@
             "lost_games": 2
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:og:natsumi",
@@ -33394,7 +33430,8 @@
             "lost_games": 7
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:auroragaming:nightfall",
@@ -34372,7 +34409,8 @@
             "most_assists": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:teamliquid:nisha",
@@ -35454,7 +35492,8 @@
             "9_slots": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:teamresilience:niu",
@@ -35740,7 +35779,8 @@
             "4+_active_items": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:teamvision:noone",
@@ -36734,7 +36774,8 @@
             "most_voice_lines": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:teamspirit:notme",
@@ -37136,7 +37177,8 @@
             "bbs_before_30min": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:xtremegaming:nothingtosay",
@@ -38111,7 +38153,8 @@
             "most_voice_lines": 2
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:teamvision:noticed",
@@ -38891,7 +38934,8 @@
             "0_kills": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:nigmagalaxy:omar",
@@ -39844,7 +39888,8 @@
             "most_assists": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:teamresilience:planet",
@@ -40236,7 +40281,8 @@
             "0_kills": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:1wteam:pure",
@@ -40832,7 +40878,8 @@
             "most_voice_lines": 2
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:og:raven",
@@ -41603,7 +41650,8 @@
             "4+_active_items": 3
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:gamerlegion:rcy",
@@ -42666,7 +42714,8 @@
             "lost_games": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:huligani:respect",
@@ -43528,7 +43577,8 @@
             "lost_games": 2
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:teamspirit:rue",
@@ -44525,7 +44575,8 @@
             "most_assists": 2
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:teamyandex:saksa",
@@ -45328,7 +45379,8 @@
             "9_slots": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:teamvision:satanic",
@@ -46383,7 +46435,8 @@
             "4+_active_items": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:betboomteam:save",
@@ -47472,7 +47525,8 @@
             "bbs_before_30min": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:huligani:sayuw",
@@ -47852,7 +47906,8 @@
             "most_assists": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:vicigaming:shiro",
@@ -48615,7 +48670,8 @@
             "most_voice_lines": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:og:skem",
@@ -49407,7 +49463,8 @@
             "most_assists": 1
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:teamfalcons:skiter",
@@ -50368,7 +50425,8 @@
             "0_kills": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:teamfalcons:sneyking",
@@ -51360,7 +51418,8 @@
             "0_kills": 1
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:gamerlegion:speeed",
@@ -52435,7 +52494,8 @@
             "0_kills": 2
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:huligani:ssnovv1",
@@ -52996,7 +53056,8 @@
             "lost_games": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:nigmagalaxy:sumail",
@@ -53675,7 +53736,8 @@
             "4+_active_items": 2
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:lgdgaming:tailung",
@@ -54659,7 +54721,8 @@
             "bbs_before_30min": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:lgdgaming:thiolicor",
@@ -55752,7 +55815,8 @@
             "lowest_networth": 1
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:og:tims",
@@ -56541,7 +56605,8 @@
             "most_deaths": 2
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:teamliquid:tofu",
@@ -57622,7 +57687,8 @@
             "most_assists": 3
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:teamyandex:watson",
@@ -58409,7 +58475,8 @@
             "0_kills": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:1wteam:whitemon",
@@ -59222,7 +59289,8 @@
             "most_assists": 4
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:lgdgaming:wisper",
@@ -60214,7 +60282,8 @@
             "bbs_before_30min": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:auroragaming:ws",
@@ -61367,7 +61436,8 @@
             "most_assists": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:vicigaming:xinq",
@@ -61960,7 +62030,8 @@
             "most_assists": 2
           }
         }
-      }
+      },
+      "role_number": 4
     },
     {
       "id": "roster:vicigaming:xm",
@@ -62747,7 +62818,8 @@
             "most_assists": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:xtremegaming:xnova",
@@ -63746,7 +63818,8 @@
             "most_assists": 4
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:xtremegaming:xxs",
@@ -64703,7 +64776,8 @@
             "most_assists": 1
           }
         }
-      }
+      },
+      "role_number": 3
     },
     {
       "id": "roster:vicigaming:y",
@@ -65667,7 +65741,8 @@
             "most_assists": 2
           }
         }
-      }
+      },
+      "role_number": 5
     },
     {
       "id": "roster:teamspirit:yatoro",
@@ -66650,7 +66725,8 @@
             "9_slots": 2
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:og:yopaj",
@@ -67435,7 +67511,8 @@
             "9_slots": 1
           }
         }
-      }
+      },
+      "role_number": 2
     },
     {
       "id": "roster:teamresilience:ysr04e",
@@ -67628,7 +67705,8 @@
             "4+_active_items": 2
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:lgdgaming:yuma",
@@ -68677,7 +68755,8 @@
             "9_slots": 1
           }
         }
-      }
+      },
+      "role_number": 1
     },
     {
       "id": "roster:teamresilience:zzq",
@@ -68967,7 +69046,8 @@
             "most_deaths": 1
           }
         }
-      }
+      },
+      "role_number": 5
     }
   ],
   "warnings": [

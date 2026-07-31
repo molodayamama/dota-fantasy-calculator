@@ -10,6 +10,8 @@ class SchemaTest(unittest.TestCase):
         self.assertEqual(rules["schema_version"], 1)
         self.assertGreaterEqual(len(rules["roles"]), 3)
         for role in rules["roles"]:
+            self.assertIn(role["selection"], {"team_duo", "team_player", "player"})
+            self.assertGreaterEqual(len(role["role_numbers"]), 1)
             self.assertEqual(len(role["slot_colors"]), 3)
             self.assertEqual(len(role["default_slots"]), 3)
             for slot in role["default_slots"]:
