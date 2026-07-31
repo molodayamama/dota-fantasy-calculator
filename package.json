@@ -1,0 +1,12 @@
+{
+  "name": "fantasy-calculator-ui-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:ui": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.0"
+  }
+}
+

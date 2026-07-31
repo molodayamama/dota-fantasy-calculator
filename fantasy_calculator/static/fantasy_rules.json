@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "roles": [
+    {
+      "id": "core",
+      "name_ru": "Основа",
+      "name_en": "Core",
+      "slot_colors": ["red", "green", "red"],
+      "default_slots": [
+        {"stat": "tower_kills", "percent": 110},
+        {"stat": "teamfight_participation", "percent": 240},
+        {"stat": "deaths", "percent": 110}
+      ]
+    },
+    {
+      "id": "mid",
+      "name_ru": "Центр",
+      "name_en": "Mid",
+      "slot_colors": ["red", "blue", "green"],
+      "default_slots": [
+        {"stat": "deaths", "percent": 130},
+        {"stat": "watchers_taken", "percent": 180},
+        {"stat": "firstblood", "percent": 160}
+      ]
+    },
+    {
+      "id": "support",
+      "name_ru": "Поддержка",
+      "name_en": "Support",
+      "slot_colors": ["blue", "green", "blue"],
+      "default_slots": [
+        {"stat": "camps_stacked", "percent": 210},
+        {"stat": "tormentor_kills", "percent": 150},
+        {"stat": "smokes_used", "percent": 160}
+      ]
+    }
+  ],
+  "slot_colors": {
+    "red": {"name_ru": "Красная", "name_en": "Red"},
+    "green": {"name_ru": "Зелёная", "name_en": "Green"},
+    "blue": {"name_ru": "Синяя", "name_en": "Blue"}
+  },
+  "stats": {
+    "kills": {"name_ru": "Убийства", "short_ru": "Убийства", "name_en": "Kills", "color": "red", "factor": 107, "scoring": "normal"},
+    "deaths": {"name_ru": "Смерти", "short_ru": "Смерти", "name_en": "Deaths", "color": "red", "factor": 195, "base": 1950, "scoring": "inverse"},
+    "creep_score": {"name_ru": "Крипы", "short_ru": "Крипы", "name_en": "Creep score", "color": "red", "factor": 3, "scoring": "normal"},
+    "gpm": {"name_ru": "З/М", "short_ru": "З/М", "name_en": "Gold per minute", "color": "red", "factor": 2, "scoring": "normal"},
+    "madstone_collected": {"name_ru": "Подбор безумрудов", "short_ru": "Безумруды", "name_en": "Madstone collected", "color": "red", "factor": 13, "scoring": "normal"},
+    "tower_kills": {"name_ru": "Башни", "short_ru": "Башни", "name_en": "Tower kills", "color": "red", "factor": 352, "scoring": "normal"},
+    "obs_placed": {"name_ru": "Установка вардов", "short_ru": "Варды", "name_en": "Observer wards", "color": "blue", "factor": 117, "scoring": "normal"},
+    "camps_stacked": {"name_ru": "Стак лагерей", "short_ru": "Стаки", "name_en": "Camps stacked", "color": "blue", "factor": 234, "scoring": "normal"},
+    "runes_grabbed": {"name_ru": "Руны", "short_ru": "Руны", "name_en": "Runes grabbed", "color": "blue", "factor": 141, "scoring": "normal"},
+    "watchers_taken": {"name_ru": "Захват смотрителей", "short_ru": "Смотрители", "name_en": "Watchers taken", "color": "blue", "factor": 147, "scoring": "normal"},
+    "lotuses_grabbed": {"name_ru": "Сбор лотосов", "short_ru": "Лотосы", "name_en": "Lotuses grabbed", "color": "blue", "factor": 176, "scoring": "normal"},
+    "smokes_used": {"name_ru": "Применения Smoke of Deceit", "short_ru": "Смоки", "name_en": "Smokes used", "color": "blue", "factor": 293, "scoring": "normal"},
+    "roshan_kills": {"name_ru": "Убийства Рошана", "short_ru": "Рошан", "name_en": "Roshan kills", "color": "green", "factor": 1172, "scoring": "normal"},
+    "teamfight_participation": {"name_ru": "Командные сражения", "short_ru": "Ком. бои", "name_en": "Teamfight participation", "color": "green", "factor": 2124, "cap": 2124, "scoring": "normal"},
+    "stuns": {"name_ru": "Оглушения", "short_ru": "Оглушения", "name_en": "Stuns", "color": "green", "factor": 10, "scoring": "normal"},
+    "tormentor_kills": {"name_ru": "Убийства Терзателей", "short_ru": "Терзатели", "name_en": "Tormentor kills", "color": "green", "factor": 879, "scoring": "normal"},
+    "courier_kills": {"name_ru": "Убийства курьеров", "short_ru": "Курьеры", "name_en": "Courier kills", "color": "green", "factor": 703, "scoring": "normal"},
+    "firstblood": {"name_ru": "Первая кровь", "short_ru": "Первая кровь", "name_en": "First blood", "color": "green", "factor": 1934, "scoring": "normal"}
+  },
+  "title_prefixes": {
+    "crimson": {"name_ru": "Багровый", "name_en": "Crimson", "percent": 6, "scope": "player_title", "condition": "red", "description_ru": "при игре за красного героя", "description_en": "when playing a red hero"},
+    "cerulean": {"name_ru": "Лазурный", "name_en": "Cerulean", "percent": 11, "scope": "player_title", "condition": "blue", "description_ru": "при игре за синего героя", "description_en": "when playing a blue hero"},
+    "emerald": {"name_ru": "Изумрудный", "name_en": "Emerald", "percent": 6, "scope": "player_title", "condition": "green", "description_ru": "при игре за зелёного героя", "description_en": "when playing a green hero"},
+    "royal": {"name_ru": "Королевский", "name_en": "Royal", "percent": 10, "scope": "player_title", "condition": "purple", "description_ru": "при игре за фиолетового героя", "description_en": "when playing a purple hero"},
+    "golden": {"name_ru": "Золотой", "name_en": "Golden", "percent": 8, "scope": "player_title", "condition": "yellow_brown", "description_ru": "при игре за жёлтого или коричневого героя", "description_en": "when playing a yellow or brown hero"},
+    "elemental": {"name_ru": "Элементальный", "name_en": "Elemental", "percent": 8, "scope": "player_title", "condition": "elemental", "description_ru": "при игре за водного, огненного или ледяного героя", "description_en": "when playing an aquatic, fiery, or icy hero"},
+    "otherworldly": {"name_ru": "Потусторонний", "name_en": "Otherworldly", "percent": 7, "scope": "player_title", "condition": "otherworldly", "description_ru": "при игре за нежить, демона или духа", "description_en": "when playing an undead, demon, or spirit hero"},
+    "heroic": {"name_ru": "Героический", "name_en": "Heroic", "percent": 9, "scope": "player_title", "condition": "heroic", "description_ru": "при игре за героя в маске или плаще", "description_en": "when playing a masked or cloaked hero"}
+  },
+  "title_suffixes": {
+    "tormented": {"name_ru": "Мученик", "name_en": "Martyr", "percent": 23, "scope": "global_subtitle", "condition": "total_deaths_from_torm", "description_ru": "если кто-либо из игроков умрёт от Терзателя", "description_en": "if any player dies to a Tormentor"},
+    "flayed_twins_priest": {"name_ru": "Жрец Бескожих близнецов", "name_en": "Priest of the Flayed Twins", "percent": 9, "scope": "global_subtitle", "condition": "firstblood_before_horn", "description_ru": "если кто-либо прольёт первую кровь до стартового горна", "description_en": "if first blood happens before the starting horn"},
+    "patient": {"name_ru": "Выжидатель", "name_en": "Patient", "percent": 23, "scope": "global_subtitle", "condition": "firstblood_after_10min", "description_ru": "если первая кровь не пролилась до 10:00", "description_en": "if first blood does not happen before 10:00"},
+    "underdog": {"name_ru": "Аутсайдер", "name_en": "Underdog", "percent": 6, "scope": "player_subtitle", "condition": "lost_games", "description_ru": "если команда этого игрока потерпела поражение", "description_en": "if this player's team lost the game"},
+    "decisive": {"name_ru": "Удалец", "name_en": "Decisive", "percent": 24, "scope": "global_subtitle", "condition": "games<25min", "description_ru": "если игра продлилась менее 25 минут", "description_en": "if the game lasted less than 25 minutes"},
+    "victory_maker": {"name_ru": "Творец победы", "name_en": "Victory Maker", "percent": 16, "scope": "global_subtitle", "condition": "last_possible_match", "description_ru": "в последней возможной игре матча", "description_en": "in the last possible game of the match"},
+    "lucky": {"name_ru": "Везунчик", "name_en": "Lucky", "percent": 21, "scope": "global_subtitle", "condition": "duration_ends_8", "description_ru": "если длительность игры заканчивается на цифру 8", "description_en": "if the game duration ends in 8"},
+    "tormentor": {"name_ru": "Мучитель", "name_en": "Tormentor", "percent": 13, "scope": "global_subtitle", "condition": "fountain_kill", "description_ru": "если хотя бы одного игрока убьют у его фонтана", "description_en": "if at least one player is killed near their fountain"}
+  },
+  "hero_tag_groups": {
+    "red": [2, 4, 11, 14, 25, 35, 37, 38, 49, 51, 61, 64, 65, 69, 78, 79, 81, 87, 95, 104, 106, 110, 120, 128, 129, 137],
+    "blue": [5, 10, 12, 13, 15, 17, 22, 31, 32, 33, 48, 52, 60, 64, 68, 71, 84, 91, 92, 102, 111, 112, 113, 138],
+    "green": [20, 21, 29, 36, 40, 42, 45, 47, 53, 58, 76, 83, 85, 86, 89, 94, 107, 108, 114, 119, 123, 138],
+    "purple": [],
+    "yellow_brown": [],
+    "elemental": [5, 6, 10, 23, 25, 28, 29, 31, 49, 56, 59, 64, 65, 68, 69, 74, 78, 84, 89, 93, 100, 105, 106, 110, 112, 135],
+    "otherworldly": [11, 14, 17, 20, 23, 26, 31, 36, 39, 42, 43, 45, 54, 56, 59, 67, 69, 85, 106, 107, 108, 121, 126, 138],
+    "horns": [13, 32, 38, 39, 45, 47, 52, 56, 58, 60, 64, 69, 71, 76, 92, 96, 97, 101, 103, 108, 109, 110, 112, 119],
+    "bearded": [2, 7, 8, 12, 17, 22, 23, 32, 34, 35, 36, 37, 38, 42, 53, 55, 57, 58, 70, 71, 73, 77, 78, 80, 82, 87, 90, 96, 97, 100, 114, 120, 121, 123, 126, 129],
+    "aquatic": [5, 6, 10, 23, 25, 28, 29, 31, 49, 56, 59, 64, 65, 68, 69, 74, 78, 84, 89, 93, 100, 105, 106, 110, 112, 135],
+    "heroic": []
+  },
+  "active_item_ids": [1, 50, 65, 73, 77, 79, 81, 86, 90, 92, 96, 98, 100, 102, 104, 108, 110, 112, 114, 116, 119, 121, 127, 129, 133, 135, 136, 145, 146, 147, 158, 160, 162, 164, 172, 180, 181, 185, 187, 188, 206, 208, 214, 220, 223, 225, 229, 231, 235, 247, 249, 250, 252, 254, 256, 263, 267, 269, 273, 277, 286, 287, 288, 289, 290, 291, 292, 293, 355, 357, 359, 361, 362, 365, 366, 371, 473, 485, 600, 603, 604, 609, 635, 638, 640, 653, 655, 670, 675, 676, 677, 678, 680, 691, 692, 727, 731, 939, 947, 968, 990, 1094],
+  "role_overrides": {
+    "accounts": {},
+    "names": {}
+  }
+}

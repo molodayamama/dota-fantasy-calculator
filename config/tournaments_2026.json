@@ -1,0 +1,185 @@
+[
+  {
+    "id": 19785,
+    "name": "Esports World Cup 2026",
+    "short_name": "EWC 2026",
+    "kind": "main",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19892,
+    "name": "The International 2026 - Regional Qualifier Europe",
+    "short_name": "TI 2026 EU Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19890,
+    "name": "The International 2026 - Regional Qualifier North America",
+    "short_name": "TI 2026 NA Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19894,
+    "name": "The International 2026 - Regional Qualifier Southeast Asia",
+    "short_name": "TI 2026 SEA Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19891,
+    "name": "The International 2026 - Regional Qualifier South America",
+    "short_name": "TI 2026 SA Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19893,
+    "name": "The International 2026 - Regional Qualifier China",
+    "short_name": "TI 2026 CN Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19101,
+    "name": "BLAST SLAM VII",
+    "short_name": "BLAST VII",
+    "kind": "main",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19699,
+    "name": "Road To EWC 2026 Regional Qualifiers",
+    "short_name": "Road To EWC Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19696,
+    "name": "DreamLeague Season 29",
+    "short_name": "DreamLeague S29",
+    "kind": "main",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19543,
+    "name": "PGL Wallachia 2026 Season 8",
+    "short_name": "PGL Wallachia S8",
+    "kind": "main",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19448,
+    "name": "DreamLeague Season 29 Qualifiers",
+    "short_name": "DreamLeague S29 Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19539,
+    "name": "RES Unchained - A Blast Dota Slam VII Qualifier EU",
+    "short_name": "BLAST VII EU Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19538,
+    "name": "RES Unchained - A Blast Dota Slam VII Qualifier SEA",
+    "short_name": "BLAST VII SEA Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19520,
+    "name": "BLAST Slam VII China Qualifier",
+    "short_name": "BLAST VII CN Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19422,
+    "name": "ESL One Birmingham 2026",
+    "short_name": "ESL Birmingham",
+    "kind": "main",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19435,
+    "name": "PGL Wallachia 2026 Season 7",
+    "short_name": "PGL Wallachia S7",
+    "kind": "main",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19269,
+    "name": "DreamLeague Season 28",
+    "short_name": "DreamLeague S28",
+    "kind": "main",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19099,
+    "name": "BLAST SLAM VI",
+    "short_name": "BLAST VI",
+    "kind": "main",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19239,
+    "name": "FISSURE Universe Episode 8",
+    "short_name": "FISSURE Universe 8",
+    "kind": "main",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19090,
+    "name": "ESL One Birmingham 2026 Qualifiers",
+    "short_name": "ESL Birmingham Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19089,
+    "name": "DreamLeague Season 28 Qualifiers",
+    "short_name": "DreamLeague S28 Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19155,
+    "name": "RES Unchained - A Blast Dota Slam VI Qualifier EU",
+    "short_name": "BLAST VI EU Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19154,
+    "name": "RES Unchained - A Blast Dota Slam VI Qualifier SEA",
+    "short_name": "BLAST VI SEA Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19148,
+    "name": "BLAST Slam VI China Qualifier",
+    "short_name": "BLAST VI CN Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19268,
+    "name": "FISSURE Universe Episode 8 Open Qualifiers",
+    "short_name": "FISSURE 8 Open Qual",
+    "kind": "qualifier",
+    "enabled_by_default": true
+  },
+  {
+    "id": 19719,
+    "name": "The International 2026",
+    "short_name": "TI 2026",
+    "kind": "upcoming",
+    "enabled_by_default": false
+  }
+]
+

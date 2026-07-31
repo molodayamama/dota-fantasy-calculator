@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://molodayamama.github.io/dota-fantasy-calculator/sitemap.xml

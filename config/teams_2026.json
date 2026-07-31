@@ -1,0 +1,704 @@
+{
+  "schema_version": 1,
+  "source": {
+    "name": "Liquipedia The International 2026 participants",
+    "url": "https://liquipedia.net/dota2/The_International/2026",
+    "checked_at": "2026-07-31"
+  },
+  "teams": [
+    {
+      "name": "Aurora Gaming",
+      "aliases": [
+        "Aurora"
+      ],
+      "players": [
+        {
+          "nick": "Nightfall",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Mikoto",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Ws",
+          "role_number": 3,
+          "role": "core",
+          "aliases": [
+            "Ws`"
+          ]
+        },
+        {
+          "nick": "Mira",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "kaori",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        726228,
+        9467224
+      ]
+    },
+    {
+      "name": "BetBoom Team",
+      "aliases": [
+        "BetBoom"
+      ],
+      "players": [
+        {
+          "nick": "Kiritych~",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "gpk~",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "MieRo",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Save-",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "Kataomi",
+          "role_number": 5,
+          "role": "support",
+          "aliases": [
+            "Kataomi`"
+          ]
+        }
+      ],
+      "team_ids": [
+        8255888
+      ]
+    },
+    {
+      "name": "1w Team",
+      "aliases": [
+        "1w",
+        "1win Team"
+      ],
+      "players": [
+        {
+          "nick": "Pure",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "bzm",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "33",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Ari",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "Whitemon",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        8291895,
+        10150413,
+        10182357
+      ]
+    },
+    {
+      "name": "Team Falcons",
+      "aliases": [
+        "Falcons"
+      ],
+      "players": [
+        {
+          "nick": "skiter",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Malr1ne",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "ATF",
+          "role_number": 3,
+          "role": "core",
+          "aliases": [
+            "AMMAR_THE_F"
+          ]
+        },
+        {
+          "nick": "Cr1t-",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "Sneyking",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        9247354
+      ]
+    },
+    {
+      "name": "Team Liquid",
+      "aliases": [
+        "Liquid"
+      ],
+      "players": [
+        {
+          "nick": "m1CKe",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Nisha",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Ace",
+          "role_number": 3,
+          "role": "core",
+          "aliases": [
+            "Ace ♠"
+          ]
+        },
+        {
+          "nick": "Boxi",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "tOfu",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        2163
+      ]
+    },
+    {
+      "name": "Team Yandex",
+      "aliases": [
+        "Yandex"
+      ],
+      "players": [
+        {
+          "nick": "watson",
+          "role_number": 1,
+          "role": "core",
+          "aliases": [
+            "医者watson`"
+          ]
+        },
+        {
+          "nick": "CHIRA_JUNIOR",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "DM",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Saksa",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "Malady",
+          "role_number": 5,
+          "role": "support",
+          "aliases": [
+            "Maladych"
+          ]
+        }
+      ],
+      "team_ids": [
+        9572001,
+        9823272
+      ]
+    },
+    {
+      "name": "Xtreme Gaming",
+      "aliases": [
+        "Xtreme"
+      ],
+      "players": [
+        {
+          "nick": "Ame",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "NothingToSay",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Xxs",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "fy",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "xNova",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        8261500
+      ]
+    },
+    {
+      "name": "Team Spirit",
+      "aliases": [
+        "Spirit"
+      ],
+      "players": [
+        {
+          "nick": "Yatoro",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Larl",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Collapse",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "not me",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "rue",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        7119388
+      ]
+    },
+    {
+      "name": "TEAM VISION",
+      "aliases": [
+        "Team Vision",
+        "Vision"
+      ],
+      "players": [
+        {
+          "nick": "Satanic",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "No[o]ne-",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Noticed",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "9Class",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "Dukalis",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        9572001,
+        9823272,
+        9824702
+      ]
+    },
+    {
+      "name": "Nigma Galaxy",
+      "aliases": [
+        "Nigma"
+      ],
+      "players": [
+        {
+          "nick": "SumaiL",
+          "role_number": 1,
+          "role": "core",
+          "aliases": [
+            "SumaiL-"
+          ]
+        },
+        {
+          "nick": "lorenof",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Davai",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "OmaR",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "GH",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        7554697,
+        9247354,
+        9303484,
+        9338413,
+        9467224,
+        10136357
+      ]
+    },
+    {
+      "name": "HULIGANI",
+      "aliases": [
+        "Huligani"
+      ],
+      "players": [
+        {
+          "nick": "ssnovv1",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Mirage`",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Corrupted",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "sayuw",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "RESPECT",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        9303383,
+        10020357,
+        10149530,
+        10182299
+      ]
+    },
+    {
+      "name": "Team Resilience",
+      "aliases": [
+        "Resilience"
+      ],
+      "players": [
+        {
+          "nick": "YSR-04E",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Echozz",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "niu",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "planet",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "zzq",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        726228,
+        5017210,
+        9316703
+      ]
+    },
+    {
+      "name": "Vici Gaming",
+      "aliases": [
+        "Vici",
+        "VG"
+      ],
+      "players": [
+        {
+          "nick": "shiro",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Xm",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Bach",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "XinQ",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "y`",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        726228
+      ]
+    },
+    {
+      "name": "OG",
+      "aliases": [],
+      "players": [
+        {
+          "nick": "Natsumi",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Yopaj-",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Raven",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "TIMS",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "skem",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        2586976,
+        9691969,
+        10020555,
+        10144697
+      ]
+    },
+    {
+      "name": "GamerLegion",
+      "aliases": [
+        "Gamer Legion"
+      ],
+      "players": [
+        {
+          "nick": "Ghost",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "RCY",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Fayde",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Bignum",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "Speeed",
+          "role_number": 5,
+          "role": "support",
+          "aliases": []
+        }
+      ],
+      "team_ids": [
+        9964962
+      ]
+    },
+    {
+      "name": "LGD Gaming",
+      "aliases": [
+        "LGD"
+      ],
+      "players": [
+        {
+          "nick": "Yuma",
+          "role_number": 1,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "TaiLung",
+          "role_number": 2,
+          "role": "mid",
+          "aliases": []
+        },
+        {
+          "nick": "Wisper",
+          "role_number": 3,
+          "role": "core",
+          "aliases": []
+        },
+        {
+          "nick": "Thiolicor",
+          "role_number": 4,
+          "role": "support",
+          "aliases": []
+        },
+        {
+          "nick": "KJ",
+          "role_number": 5,
+          "role": "support",
+          "aliases": [
+            "KingJungles"
+          ]
+        }
+      ],
+      "team_ids": [
+        9303484,
+        10102123,
+        10150538
+      ]
+    }
+  ]
+}
