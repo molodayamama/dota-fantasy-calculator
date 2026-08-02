@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import math
 import os
 import re
 from collections import Counter, defaultdict
@@ -30,6 +31,13 @@ GLOBAL_SUBTITLES = (
     "last_possible_match",
     "fountain_kill",
 )
+
+# OpenDota position bins map the Dota world roughly as world / 128 + 128.
+# A 10-bin radius covers the 1200-unit fountain area plus death_pos rounding.
+OPENDOTA_COORD_SCALE = 128.0
+FOUNTAIN_RADIUS_COORDS = 10.0
+RADIANT_FOUNTAIN_CENTER = (-7456 / OPENDOTA_COORD_SCALE + 128, -6938 / OPENDOTA_COORD_SCALE + 128)
+DIRE_FOUNTAIN_CENTER = (7472 / OPENDOTA_COORD_SCALE + 128, 6912 / OPENDOTA_COORD_SCALE + 128)
 
 
 def _as_number(value: Any, default: float = 0.0) -> float:
@@ -226,6 +234,29 @@ def _lost_game(player: dict[str, Any], match_detail: dict[str, Any]) -> bool:
     return radiant_win != _is_radiant(player)
 
 
+def _has_fountain_death(match_detail: dict[str, Any]) -> bool:
+    players = match_detail.get("players", []) or []
+    for teamfight in match_detail.get("teamfights", []) or []:
+        for index, teamfight_player in enumerate(teamfight.get("players", []) or []):
+            if index >= len(players):
+                continue
+            center = RADIANT_FOUNTAIN_CENTER if _is_radiant(players[index]) else DIRE_FOUNTAIN_CENTER
+            for raw_x, y_counts in (teamfight_player.get("deaths_pos") or {}).items():
+                if not isinstance(y_counts, dict):
+                    continue
+                for raw_y, count in y_counts.items():
+                    if _as_number(count) <= 0:
+                        continue
+                    try:
+                        x = float(raw_x)
+                        y = float(raw_y)
+                    except (TypeError, ValueError):
+                        continue
+                    if math.hypot(x - center[0], y - center[1]) <= FOUNTAIN_RADIUS_COORDS:
+                        return True
+    return False
+
+
 def aggregate_matches(
     *,
     year: int,
@@ -299,6 +330,8 @@ def aggregate_matches(
                 global_counts["last_possible_match"] += 1
             if any((player.get("killed_by") or {}).get("npc_dota_miniboss", 0) for player in players_in_match if isinstance(player.get("killed_by"), dict)):
                 global_counts["total_deaths_from_torm"] += 1
+            if _has_fountain_death(match_detail):
+                global_counts["fountain_kill"] += 1
 
             max_assists = max(_as_number(player.get("assists")) for player in players_in_match)
             max_deaths = max(_as_number(player.get("deaths")) for player in players_in_match)

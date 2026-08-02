@@ -25,6 +25,14 @@ class RefreshParserTest(unittest.TestCase):
                     {"is_pick": True, "hero_id": 1, "team": 0},
                     {"is_pick": True, "hero_id": 2, "team": 1},
                 ],
+                "teamfights": [
+                    {
+                        "players": [
+                            {"deaths_pos": {}},
+                            {"deaths_pos": {"182": {"175": 1}}},
+                        ]
+                    }
+                ],
                 "players": [
                     {
                         "account_id": 101,
@@ -101,6 +109,7 @@ class RefreshParserTest(unittest.TestCase):
         self.assertEqual(snapshot["tournaments"][0]["global_subtitle_counts"]["games<25min"], 1)
         self.assertEqual(snapshot["tournaments"][0]["global_subtitle_counts"]["total_deaths_from_torm"], 1)
         self.assertEqual(snapshot["tournaments"][0]["global_subtitle_counts"]["firstblood_after_10min"], 1)
+        self.assertEqual(snapshot["tournaments"][0]["global_subtitle_counts"]["fountain_kill"], 1)
         self.assertEqual(len(snapshot["players"]), 2)
         support = next(player for player in snapshot["players"] if player["id"] == "102")
         self.assertEqual(support["name"], "Player 102")
