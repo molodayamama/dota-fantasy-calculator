@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "year": 2026,
-  "generated_at": "2026-08-02T09:51:36.161169+00:00",
+  "generated_at": "2026-08-02T10:06:10.412147+00:00",
   "source": {
     "open_dota": "https://api.opendota.com/api",
     "stratz": "https://api.stratz.com/graphql",
@@ -467,11 +467,11 @@
   ],
   "players": [
     {
-      "id": "roster:1wteam:33",
+      "id": "roster:ironwing:33",
       "name": "33",
       "role": "core",
       "role_number": 3,
-      "team_name": "1w Team",
+      "team_name": "Iron Wing",
       "team_logo": null,
       "matches": 163,
       "per_tournament": {
@@ -4352,11 +4352,11 @@
       }
     },
     {
-      "id": "roster:1wteam:ari",
+      "id": "roster:ironwing:ari",
       "name": "Ari",
       "role": "support",
       "role_number": 4,
-      "team_name": "1w Team",
+      "team_name": "Iron Wing",
       "team_logo": null,
       "matches": 163,
       "per_tournament": {
@@ -8896,11 +8896,11 @@
       }
     },
     {
-      "id": "roster:1wteam:bzm",
+      "id": "roster:ironwing:bzm",
       "name": "bzm",
       "role": "mid",
       "role_number": 2,
-      "team_name": "1w Team",
+      "team_name": "Iron Wing",
       "team_logo": null,
       "matches": 163,
       "per_tournament": {
@@ -19682,11 +19682,11 @@
       }
     },
     {
-      "id": "roster:betboomteam:gpk",
+      "id": "roster:boomboys:gpk",
       "name": "gpk~",
       "role": "mid",
       "role_number": 2,
-      "team_name": "BetBoom Team",
+      "team_name": "Boomboys",
       "team_logo": null,
       "matches": 187,
       "per_tournament": {
@@ -21929,11 +21929,11 @@
       }
     },
     {
-      "id": "roster:betboomteam:kataomi",
+      "id": "roster:boomboys:kataomi",
       "name": "Kataomi",
       "role": "support",
       "role_number": 5,
-      "team_name": "BetBoom Team",
+      "team_name": "Boomboys",
       "team_logo": null,
       "matches": 187,
       "per_tournament": {
@@ -23054,11 +23054,11 @@
       }
     },
     {
-      "id": "roster:betboomteam:kiritych",
+      "id": "roster:boomboys:kiritych",
       "name": "Kiritych~",
       "role": "core",
       "role_number": 1,
-      "team_name": "BetBoom Team",
+      "team_name": "Boomboys",
       "team_logo": null,
       "matches": 187,
       "per_tournament": {
@@ -29792,11 +29792,11 @@
       }
     },
     {
-      "id": "roster:betboomteam:miero",
+      "id": "roster:boomboys:miero",
       "name": "MieRo",
       "role": "core",
       "role_number": 3,
-      "team_name": "BetBoom Team",
+      "team_name": "Boomboys",
       "team_logo": null,
       "matches": 187,
       "per_tournament": {
@@ -41232,11 +41232,11 @@
       }
     },
     {
-      "id": "roster:1wteam:pure",
+      "id": "roster:ironwing:pure",
       "name": "Pure",
       "role": "core",
       "role_number": 1,
-      "team_name": "1w Team",
+      "team_name": "Iron Wing",
       "team_logo": null,
       "matches": 132,
       "per_tournament": {
@@ -47537,11 +47537,11 @@
       }
     },
     {
-      "id": "roster:betboomteam:save",
+      "id": "roster:boomboys:save",
       "name": "Save-",
       "role": "support",
       "role_number": 4,
-      "team_name": "BetBoom Team",
+      "team_name": "Boomboys",
       "team_logo": null,
       "matches": 187,
       "per_tournament": {
@@ -59905,11 +59905,11 @@
       }
     },
     {
-      "id": "roster:1wteam:whitemon",
+      "id": "roster:ironwing:whitemon",
       "name": "Whitemon",
       "role": "support",
       "role_number": 5,
-      "team_name": "1w Team",
+      "team_name": "Iron Wing",
       "team_logo": null,
       "matches": 163,
       "per_tournament": {
